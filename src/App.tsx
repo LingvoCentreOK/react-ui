@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+//import ReactDOM from "react-dom/client";
+import {
+   createBrowserRouter,
+   RouterProvider,
+} from "react-router-dom";
+
+import Layout/* , { layoutLoader } */ from "./components/layout/Layout";
+import HomePage from "./components/home_page/HomePage";
+import SecondPage/* , { secondLoader } */ from "./components/second_page/SecondPage";
+import NotFoundPage from "./components/not_found_page/NotFoundPage";
+
+
 
 function App() {
-   return (
-      <div className="App">
-         <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-               Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <a
-               className="App-link"
-               href="https://reactjs.org"
-               target="_blank"
-               rel="noopener noreferrer"
-            >
-               Learn React
-            </a>
-         </header>
-      </div>
-   );
+
+const router = createBrowserRouter([
+   {
+      path: "/",
+      element: <Layout />,
+      children: [
+         {
+            index: true,
+            element: <HomePage />,
+            /* loader: layoutLoader, */
+         },
+         {
+            path: "/secondPage",
+            element: <SecondPage />,
+            /* loader: secondLoader, */
+         },
+         {
+            path: "/*",
+            element: <NotFoundPage />,
+            /* loader: secondLoader, */
+         },
+      ],
+   },
+]);
+   return <RouterProvider router={router} />
 }
 
 export default App;
