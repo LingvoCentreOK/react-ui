@@ -1,15 +1,17 @@
 import React from 'react';
+
 import { Outlet } from "react-router-dom";
-import Header from '../header/Header';
+//import MyParallaxComponent from '../my_parallax_component/MyParallaxComponent';
+//import Header from '../header/Header';
 
 
 const Layout: React.FC = () => {
    return (
-         <div>
-            Layout
-               <Header />
-               <Outlet />
-         </div>
+      <div>
+         {/* <MyParallaxComponent /> */}
+         {/* <Header /> */}
+         <Outlet />
+      </div>
    )
 }
 
