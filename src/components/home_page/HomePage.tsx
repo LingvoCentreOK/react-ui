@@ -29,12 +29,10 @@ const HomePage: React.FC = () => {
       setIsTextVisible(true);
    }, []);
 
-
    const parallaxTextStyles = {
       transform: `translate(${position.x}px, ${position.y}px)`,
       transition: 'transform 0.5s ease-in-out 0.2s',
    };
-
 
    return (
       <Box
@@ -243,7 +241,7 @@ const HomePage: React.FC = () => {
                color: 'primary.contrastText',
                fontSize: '32px',
                width: '440px',
-               fontWeight: 600,
+               fontWeight: '600',
                border: '3px solid white',
                borderRadius: '100px',
                m: '30px auto 421px',
