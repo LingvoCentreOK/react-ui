@@ -41,13 +41,10 @@ const App: React.FC = () => {
                path: "/news-page",
                element: <NewsPage />,
             },
-           /*  {
-               path: "/*",
-               element: <ErrorPage />,
-            }, */
          ],
       },
    ]);
+
    return (
       <ThemeProvider theme={theme}>
          <CssBaseline />

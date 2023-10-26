@@ -11,8 +11,6 @@ import { Box } from '@mui/system';
 const ErrorPage: React.FC = () => {
    const error: unknown = useRouteError();
 
-   console.log('error: ', error);
-
    return (
       <Box display='flex' alignItems='center'>
          <Alert severity='error'
@@ -31,7 +29,7 @@ const ErrorPage: React.FC = () => {
                <Typography variant='h3'>
                   <i>
                      {(error as Error)?.message ||
-                        (error as { statusText?: string })?.statusText}
+                        (error as { data?: string })?.data}
                   </i>
                </Typography>
             </Stack>

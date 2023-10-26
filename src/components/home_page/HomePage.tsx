@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { setPosition, setIsTextVisible } from '../../store/rootSlice';
+
 import './HomePage.css';
 
-
 const HomePage: React.FC = () => {
-   const [position, setPosition] = useState({ x: 0, y: 0 });
-   const [isTextVisible, setIsTextVisible] = useState(false);
+   const position = useAppSelector(state => state.reducer.position);
+   const isTextVisible = useAppSelector(state => state.reducer.isTextVisible);
+   const dispatch = useAppDispatch();
 
    const handleMouseMove = (event: MouseEvent) => {
       const offsetX = (window.innerWidth / 2 - event.clientX) * 0.02;
       const offsetY = (window.innerHeight / 2 - event.clientY) * 0.02;
-
-      setPosition({ x: offsetX, y: offsetY });
+      dispatch(setPosition({ x: offsetX, y: offsetY }));
    };
 
    useEffect(() => {
@@ -23,11 +26,11 @@ const HomePage: React.FC = () => {
       return () => {
          document.removeEventListener('mousemove', handleMouseMove);
       };
-   }, []);
+   },);
 
    useEffect(() => {
-      setIsTextVisible(true);
-   }, []);
+      dispatch(setIsTextVisible(true));
+   }, [dispatch]);
 
    const parallaxTextStyles = {
       transform: `translate(${position.x}px, ${position.y}px)`,
