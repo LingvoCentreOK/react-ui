@@ -34,7 +34,7 @@ jobs:
           path: 'secrets'
 
       - name: Move appropriate environment's config-*.json file into the env/ directory.
-        run: cp secrets/config*.json env
+        run: cp secrets/react-ui/config*.json env
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
