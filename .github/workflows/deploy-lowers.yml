@@ -23,9 +23,24 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
+
+      - run: npm ci
+        
+      - name: Check out secrets repo to grab the config.json files.
+        uses: actions/checkout@v3
+        with:
+          repository: LingvoCentreOK/secrets
+          token: ${{ secrets.CUSTOM_GITHUB_KEY }}
+          path: 'secrets'
+
+      - name: Move appropriate environment's config-*.json file into the env/ directory.
+        run: cp secrets/config*.json env
+
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
+
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
