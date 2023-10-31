@@ -29,6 +29,13 @@ module.exports = {
             "varsIgnorePattern": "^_"
          }
       ],
-      "prefer-promise-reject-errors": "error"
+      "prefer-promise-reject-errors": "error",
+      //"prettier/prettier": 0,
+      "prettier/prettier": [
+         "error",
+         {
+           "endOfLine": "auto"
+         }
+       ]
    }
 };

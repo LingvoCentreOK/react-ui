@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
    const isTextVisible = useAppSelector(state => state.reducer.isTextVisible);
    const dispatch = useAppDispatch();
 
-   const handleMouseMove = (event: MouseEvent) => {
+   const handleMouseMove = (event: MouseEvent): void => {
       const offsetX = (window.innerWidth / 2 - event.clientX) * 0.02;
       const offsetY = (window.innerHeight / 2 - event.clientY) * 0.02;
       dispatch(setPosition({ x: offsetX, y: offsetY }));
