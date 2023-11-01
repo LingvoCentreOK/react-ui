@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import Layout from "./components/layout/Layout";
-import HomePage /* , { homePageLoader }*/ from "./components/home_page/HomePage";
+import HomePage from "./components/home_page/HomePage";
 import NewsPage from "./components/news_page/NewsPage";
 import ErrorPage from "./components/error_page/ErrorPage";
 

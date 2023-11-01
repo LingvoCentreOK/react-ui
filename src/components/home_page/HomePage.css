@@ -1,34 +1,11 @@
-/* Початкові стилі для анімації "здалеку" */
+/* Initial styles for animation "from afar" */
 .initial-text {
-   transform: scale(0.5); /* Масштабування до половини розміру */
-   opacity: 0; /* Нульова прозорість */
-   /* transition: transform 0.5s, opacity 0.5s; */
+   transform: scale(0.5); /* Zoom to half size */
+   opacity: 0; /* Zero opacity */
 }
 
-/* Анімація появи тексту */
+/* Text appearance animation */
 .animate-text {
-   transform: scale(1); /* Повний розмір */
-   opacity: 1; /* Повна прозорість */
+   transform: scale(1); /* Full size */
+   opacity: 1; /* Full opacity */
 }
-/* .homepage {
-   -webkit-text-size-adjust: 100%;
-   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-   -webkit-font-smoothing: antialiased;
-   text-rendering: optimizeLegibility;
-   -webkit-box-direction: normal;
-   cursor: default;
-   box-sizing: border-box;
-   margin-top: 0px;
-   line-height: 1;
-   font-weight: 700;
-   letter-spacing: 0.3em;
-   position: absolute;
-   z-index: 1;
-   margin-bottom: 0rem;
-   opacity: 0.5;
-   color: #fff;
-   font-size: 12vw;
-   will-change: transform;
-   transform: translate3d(-2.8071%, 9.2362%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-   transform-style: preserve-3d;
-} */
