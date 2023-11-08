@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -11,8 +10,6 @@ import {
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
-
-import "./HomePage.css";
 
 const HomePage: React.FC = () => {
   const isTextVisible = useAppSelector((state) => state.reducer.isTextVisible);
@@ -26,15 +23,18 @@ const HomePage: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <Box>
       <Box
         sx={{
+          height: "100vh",
           display: "flex",
           flexGrow: 1,
           flexDirection: "column",
-          backgroundColor: "primary.main",
+          justifyContent: "center",
+          alignItems: "center",
+          background:
+            "linear-gradient(160deg, rgba(134, 116, 170), rgba(134, 116, 170), rgba(134, 116, 170, 0.4))",
           opacity: "0.6",
-          pt: "422px",
           overflow: "hidden",
         }}
       >
@@ -59,35 +59,42 @@ const HomePage: React.FC = () => {
           >
             <Typography
               sx={{
+                WebkitTextSizeAdjust: "100%",
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
+                WebkitBoxDirection: "normal",
                 fontSize: "64px",
                 fontWeight: "600",
                 color: "primary.contrastText",
                 margin: "0 auto",
                 cursor: "default",
                 transform: isTextVisible ? "scale(1)" : "scale(0.1)",
+                opacity: isTextVisible ? "1" : "0",
                 transition: "transform 2s ease",
               }}
-              className={`initial-text ${isTextVisible ? "animate-text" : ""}`}
             >
               Lingvocentre OK -
             </Typography>
             <Typography
               sx={{
+                WebkitTextSizeAdjust: "100%",
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
+                WebkitBoxDirection: "normal",
                 fontSize: "48px",
                 fontWeight: "600",
                 color: "primary.contrastText",
                 lineHeight: "76px",
                 margin: "0 auto",
                 cursor: "default",
-
                 transform: isTextVisible ? "scale(1)" : "scale(0.1)",
                 transition: "transform 2s ease",
               }}
-              className={`initial-text ${isTextVisible ? "animate-text" : ""}`}
             >
               Ми провадимо якісну мовну освіту
             </Typography>
           </Box>
+
           <MouseParallaxChild
             factorX={0.1}
             factorY={0.3}
@@ -111,11 +118,10 @@ const HomePage: React.FC = () => {
                 fontSize: "84px",
                 fontWeight: "600",
                 color: "primary.contrastText",
-                opacity: "0.6",
+                opacity: "0.5",
                 lineHeight: "102px",
                 margin: "0 auto",
                 cursor: "default",
-
                 transform: isTextVisible ? "scale(1)" : "scale(0.1)",
                 transition: "transform 2s ease",
               }}
@@ -150,7 +156,6 @@ const HomePage: React.FC = () => {
                 lineHeight: "102px",
                 margin: "0 auto",
                 cursor: "default",
-
                 transform: isTextVisible ? "scale(1)" : "scale(0.1)",
                 transition: "transform 2s ease",
               }}
@@ -183,10 +188,9 @@ const HomePage: React.FC = () => {
                 color: "primary.contrastText",
                 lineHeight: "76px",
                 wordWrap: "break-word",
-                opacity: "0.6",
+                opacity: "0.5",
                 margin: "0 auto",
                 cursor: "default",
-
                 transform: isTextVisible ? "scale(1)" : "scale(0.1)",
                 transition: "transform 2s ease",
               }}
@@ -222,7 +226,6 @@ const HomePage: React.FC = () => {
                 opacity: "0.2",
                 margin: "0 auto",
                 cursor: "default",
-
                 transform: isTextVisible ? "scale(1)" : "scale(0.1)",
                 transition: "transform 2s ease",
               }}
@@ -242,7 +245,7 @@ const HomePage: React.FC = () => {
             fontWeight: "600",
             border: "3px solid white",
             borderRadius: "100px",
-            m: "30px auto 421px",
+            m: "30px auto 0px",
             textTransform: "none",
             "&:hover": {
               border: "3px solid white",
@@ -254,7 +257,19 @@ const HomePage: React.FC = () => {
           Зв'язатись з нами
         </Button>
       </Box>
-    </>
+      <Box
+        sx={{
+          p: "200px 0px",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <p>Example second block</p>
+      </Box>
+    </Box>
   );
 };
 

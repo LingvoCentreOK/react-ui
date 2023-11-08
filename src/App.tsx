@@ -29,7 +29,6 @@ const App: React.FC = () => {
         {
           index: true,
           element: <HomePage />,
-          /* loader: homePageLoader, */
         },
         {
           path: "/news-page",
