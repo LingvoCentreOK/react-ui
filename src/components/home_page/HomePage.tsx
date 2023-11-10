@@ -65,6 +65,8 @@ const HomePage: React.FC = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          opacity: "0.6",
+          background: "linear-gradient(160deg, #A6B8F3, #CDA5F3)",
         }}
       >
         <p>Example second block</p>

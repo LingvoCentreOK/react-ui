@@ -83,12 +83,12 @@ export function ParallaxLogo(): JSX.Element {
       </MouseParallaxChild>
 
       <MouseParallaxChild
-        factorX={0.8}
-        factorY={0.8}
+        factorX={1.3}
+        factorY={1.3}
         updateStyles={{
           position: "absolute",
           top: "45%",
-          left: "10%",
+          left: "8%",
           zIndex: "-2",
           alignItems: "centre",
         }}
@@ -122,12 +122,12 @@ export function ParallaxLogo(): JSX.Element {
         <img src={canadaFlag} style={{ width: "100px", height: "100px" }} />
       </MouseParallaxChild>
       <MouseParallaxChild
-        factorX={0.8}
-        factorY={0.8}
+        factorX={1.3}
+        factorY={1.3}
         updateStyles={{
           position: "absolute",
           top: "45%",
-          right: "10%",
+          right: "8%",
           zIndex: "-2",
           alignItems: "centre",
         }}
