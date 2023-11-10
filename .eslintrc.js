@@ -3,7 +3,7 @@ module.exports = {
    "parser": "@typescript-eslint/parser",
    "parserOptions": {
       tsconfigRootDir: __dirname,
-      "project": ["./tsconfig.base.json", "./packages/*/tsconfig.json"]
+      "project": ["./tsconfig.json"]
    },
    "plugins": ["@typescript-eslint"],
    "extends": [
@@ -29,6 +29,13 @@ module.exports = {
             "varsIgnorePattern": "^_"
          }
       ],
-      "prefer-promise-reject-errors": "error"
+      "prefer-promise-reject-errors": "error",
+      //"prettier/prettier": 0,
+      "prettier/prettier": [
+         "error",
+         {
+           "endOfLine": "auto"
+         }
+       ]
    }
 };

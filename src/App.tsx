@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
-function App() {
+import Layout from "./components/layout/Layout";
+import HomePage from "./components/home_page/HomePage";
+import NewsPage from "./components/news_page/NewsPage";
+import ErrorPage from "./components/error_page/ErrorPage";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#8674AA",
+      light: "#42a5f5",
+      dark: "#1565c0",
+      contrastText: "#FFFFFF",
+    },
+  },
+});
+
+const App: React.FC = () => {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "/news-page",
+          element: <NewsPage />,
+        },
+      ],
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
