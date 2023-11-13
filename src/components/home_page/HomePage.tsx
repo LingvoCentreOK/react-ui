@@ -10,6 +10,7 @@ import {
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
+import OrganizationInfoBlock from "../organization_info_block/OrganizationInfoBlock";
 
 const HomePage: React.FC = () => {
   const isTextVisible = useAppSelector((state) => state.reducer.isTextVisible);
@@ -257,18 +258,7 @@ const HomePage: React.FC = () => {
           Зв'язатись з нами
         </Button>
       </Box>
-      <Box
-        sx={{
-          p: "200px 0px",
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <p>Example second block</p>
-      </Box>
+      <OrganizationInfoBlock />
     </Box>
   );
 };
