@@ -17,6 +17,15 @@ const theme = createTheme({
       contrastText: "#FFFFFF",
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 430,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 });
 
 const App: React.FC = () => {
