@@ -5,9 +5,11 @@ import { useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
 import { ParallaxLogo } from "./ParallaxLogo";
 import OrganizationInfoBlock from "../organization_info_block/OrganizationInfoBlock";
+import { useTheme } from "@mui/material";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const theme = useTheme();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -28,6 +30,7 @@ const HomePage: React.FC = () => {
           alignItems: "center",
           background: "linear-gradient(160deg, #CDA5F3, #A6B8F3)",
           opacity: "0.6",
+          boxSizing: "border-box",
           overflow: "hidden",
         }}
       >
@@ -52,6 +55,12 @@ const HomePage: React.FC = () => {
               border: 0,
               background: "linear-gradient(90deg, #ff8177, #8437fd)",
               color: "primary.contrastText",
+            },
+            [theme.breakpoints.down("md")]: {
+              width: "380px",
+            },
+            [theme.breakpoints.down("sm")]: {
+              width: "340px",
             },
           }}
         >
