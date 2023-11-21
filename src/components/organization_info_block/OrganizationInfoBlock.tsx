@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Grid, Typography, CardMedia, Box, useTheme } from "@mui/material";
+import { useAppDispatch } from "../../hooks";
+import { useAppSelector } from "../../hooks";
+import { setImages } from "../../store/rootSlice";
 import img1 from "../../assets/images/img_1.jpg";
 import img2 from "../../assets/images/img_2.jpg";
 import img3 from "../../assets/images/img_3.jpg";
 import img4 from "../../assets/images/img_4.jpg";
 
 const OrganizationInfoBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const theme = useTheme();
-  const [image, setImage] = useState<string[]>([img1, img2]);
+  const images = useAppSelector((state) => state.reducer.images);
 
   useEffect(() => {
     const handleResize = (): void => {
-      if (window.innerWidth <= theme.breakpoints.values.sm) {
-        setImage([...[img3, img4]]);
+      if (window.innerWidth < theme.breakpoints.values.sm) {
+        dispatch(setImages([...[img3, img4]]));
       } else {
-        setImage([...[img1, img2]]);
+        dispatch(setImages([...[img1, img2]]));
       }
     };
 
@@ -25,7 +29,7 @@ const OrganizationInfoBlock: React.FC = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [theme.breakpoints.values.sm]);
+  }, [dispatch, theme.breakpoints.values.sm]);
 
   return (
     <Box
@@ -43,7 +47,6 @@ const OrganizationInfoBlock: React.FC = () => {
     >
       <Grid
         container
-        /* rowSpacing={1} */
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{
           overflow: "hidden",
@@ -70,7 +73,7 @@ const OrganizationInfoBlock: React.FC = () => {
         >
           <CardMedia
             component="img"
-            src={image[0]}
+            src={images[0]}
             alt="img"
             sx={{
               maxWidth: "530px",
@@ -113,6 +116,7 @@ const OrganizationInfoBlock: React.FC = () => {
               [theme.breakpoints.down("lg")]: {
                 fontSize: "3.33vw",
                 lineHeight: "3.33vw",
+                m: "3.33vw 0 0 auto",
               },
               [theme.breakpoints.down("sm")]: {
                 fontSize: "20px",
@@ -154,6 +158,7 @@ const OrganizationInfoBlock: React.FC = () => {
               [theme.breakpoints.down("lg")]: {
                 fontSize: "3.33vw",
                 lineHeight: "3.33vw",
+                m: "3.33vw 0 0 0px",
               },
               [theme.breakpoints.down("sm")]: {
                 fontSize: "20px",
@@ -179,7 +184,7 @@ const OrganizationInfoBlock: React.FC = () => {
         >
           <CardMedia
             component="img"
-            src={image[1]}
+            src={images[1]}
             alt="img"
             sx={{
               maxWidth: "530px",
