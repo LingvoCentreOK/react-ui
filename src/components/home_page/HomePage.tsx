@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
           overflow: "hidden",
         }}
       >
-        <ParallaxLogo></ParallaxLogo>
+        <ParallaxLogo />
         <Button
           variant="outlined"
           size="large"
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
             [theme.breakpoints.down("md")]: {
               width: "380px",
             },
-            [theme.breakpoints.down("sm")]: {
+            [theme.breakpoints.down("xmd")]: {
               width: "340px",
             },
           }}

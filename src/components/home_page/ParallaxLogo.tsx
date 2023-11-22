@@ -38,7 +38,7 @@ const ParallaxLogo: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [dispatch, theme.breakpoints.values.md]);
-  console.log(isParallaxEnabled);
+
   return (
     <MouseParallaxContainer
       globalFactorX={0.1}
@@ -69,15 +69,28 @@ const ParallaxLogo: React.FC = () => {
             fontSize: "64px",
             fontWeight: "600",
             color: "primary.contrastText",
-            marginTop: "30%",
+            marginTop: "28%",
             cursor: "default",
             background: "-webkit-linear-gradient(0deg, #ff8177, #8437fd)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
+            [theme.breakpoints.down("lg")]: {
+              fontSize: "50px",
+              marginTop: "40%",
+              lineHeight: "48px",
+            },
             [theme.breakpoints.down("md")]: {
               fontSize: "40px",
-              /* lineHeight: "0px", */
-              marginTop: "40%",
+              marginTop: "50%",
+            },
+            [theme.breakpoints.down("xmd")]: {
+              fontSize: "32px",
+              marginTop: "72%",
+              lineHeight: "30px",
+            },
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "30px",
+              marginTop: "80%",
             },
           }}
         >
@@ -95,9 +108,17 @@ const ParallaxLogo: React.FC = () => {
             lineHeight: "76px",
             margin: "0 auto",
             cursor: "default",
+            [theme.breakpoints.down("lg")]: {
+              fontSize: "38px",
+            },
             [theme.breakpoints.down("md")]: {
               fontSize: "30px",
-              lineHeight: "48px",
+            },
+            [theme.breakpoints.down("xmd")]: {
+              fontSize: "22px",
+            },
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "20px",
             },
           }}
         >
