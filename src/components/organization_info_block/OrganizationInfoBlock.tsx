@@ -40,6 +40,12 @@ const OrganizationInfoBlock: React.FC = () => {
         display: "flex",
         justifyContent: "space-around",
         alignItems: "center",
+        [theme.breakpoints.down("lg")]: {
+          p: "150px 5px",
+        },
+        [theme.breakpoints.down("md")]: {
+          p: "100px 5px",
+        },
         [theme.breakpoints.down("sm")]: {
           p: "60px 5px",
         },
@@ -54,6 +60,13 @@ const OrganizationInfoBlock: React.FC = () => {
           rowGap: "433px",
           [theme.breakpoints.down("lg")]: {
             width: "96%",
+            rowGap: "200px",
+          },
+          [theme.breakpoints.down("md")]: {
+            rowGap: "100px",
+          },
+          [theme.breakpoints.down("xmd")]: {
+            rowGap: "50px",
           },
           [theme.breakpoints.down("sm")]: {
             rowGap: "0px",
