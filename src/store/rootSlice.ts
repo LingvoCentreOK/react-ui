@@ -5,11 +5,13 @@ import img2 from "../assets/images/img_2.jpg";
 type InitialState = {
   isTextVisible: boolean;
   images: string[];
+  isParallaxEnabled: boolean;
 };
 
 const initialState: InitialState = {
   isTextVisible: false,
   images: [img1, img2],
+  isParallaxEnabled: true,
 };
 
 const rootSlice = createSlice({
@@ -22,8 +24,12 @@ const rootSlice = createSlice({
     setImages(state, action: PayloadAction<string[]>) {
       state.images = action.payload;
     },
+    setIsParallaxEnabled(state, action: PayloadAction<boolean>) {
+      state.isParallaxEnabled = action.payload;
+    },
   },
 });
 
-export const { setIsTextVisible, setImages } = rootSlice.actions;
+export const { setIsTextVisible, setImages, setIsParallaxEnabled } =
+  rootSlice.actions;
 export default rootSlice.reducer;

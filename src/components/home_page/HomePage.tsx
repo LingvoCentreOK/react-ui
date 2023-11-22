@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
-import { ParallaxLogo } from "./ParallaxLogo";
+import ParallaxLogo from "./ParallaxLogo";
 import OrganizationInfoBlock from "../organization_info_block/OrganizationInfoBlock";
 import { useTheme } from "@mui/material";
 

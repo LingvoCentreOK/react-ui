@@ -158,7 +158,7 @@ const OrganizationInfoBlock: React.FC = () => {
               [theme.breakpoints.down("lg")]: {
                 fontSize: "3.33vw",
                 lineHeight: "3.33vw",
-                m: "3.33vw 0 0 0px",
+                m: "50px 0 0 0px",
               },
               [theme.breakpoints.down("sm")]: {
                 fontSize: "20px",
