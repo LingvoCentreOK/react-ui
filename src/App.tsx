@@ -14,12 +14,16 @@ declare module "@mui/material/styles" {
     sm: true;
     xmd: true;
     md: true;
+    xlg: true;
     lg: true;
     xl: true;
   }
 }
 
 const theme = createTheme({
+  typography: {
+    fontFamily: ["Roboto, sans-serif", "Maven Pro, sans-serif"].join(","),
+  },
   palette: {
     primary: {
       main: "#8674AA",
@@ -34,6 +38,7 @@ const theme = createTheme({
       sm: 430,
       xmd: 600,
       md: 900,
+      xlg: 1000,
       lg: 1200,
       xl: 1536,
     },

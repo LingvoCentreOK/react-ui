@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
 import ParallaxLogo from "./ParallaxLogo";
 import OrganizationInfoBlock from "../organization_info_block/OrganizationInfoBlock";
+import TeamCarousel from "../team_carousel/TeamCarousel";
 import { useTheme } from "@mui/material";
 
 const HomePage: React.FC = () => {
@@ -68,6 +69,7 @@ const HomePage: React.FC = () => {
         </Button>
       </Box>
       <OrganizationInfoBlock />
+      <TeamCarousel />
     </Box>
   );
 };
