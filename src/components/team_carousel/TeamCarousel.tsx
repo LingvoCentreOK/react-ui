@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   Box,
   CardMedia,
@@ -10,61 +10,106 @@ import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useAppDispatch } from "../../hooks";
+import { useAppSelector } from "../../hooks";
+import {
+  setTeamMembersState,
+  teamMembers,
+  TeamMember,
+  setCarouselPropsState,
+  carouselProps,
+  CarouselProps,
+} from "../../store/rootSlice";
 import imgCarousel1 from "../../assets/images/carousel_block_images/img_carousel_1.jpg";
+import img1 from "../../assets/images/img_1.jpg";
 import img2 from "../../assets/images/img_2.jpg";
 import img3 from "../../assets/images/img_3.jpg";
-import img4 from "../../assets/images/img_4.jpg";
-
-type TeamMember = {
-  id: string;
-  name: { name1: string; name2: string };
-  info: {
-    position1: string;
-    position2: string;
-  };
-  images: { image1: string; image2: string };
-};
 
 const TeamCarousel: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const teamMembersState = useAppSelector(
+    (state) => state.reducer.teamMembersState
+  );
+  const carouselPropsState = useAppSelector(
+    (state) => state.reducer.carouselPropsState
+  );
   const theme = useTheme();
-  const teamMembers: TeamMember[] = [
-    {
-      id: "0",
-      name: { name1: "Ольга", name2: "Хельга" },
-      info: {
-        position1: "Викладач англійської мови, магістр",
-        position2: "Викладач дацької мови, бакалавр",
+
+  const teamMembersMobileVersion: TeamMember[] = useMemo(
+    () => [
+      {
+        id: "0",
+        name: { name1: "Ольга" },
+        info: {
+          position1: "Викладач англійської мови, магістр",
+        },
+        images: { image1: imgCarousel1 },
       },
-      images: { image1: imgCarousel1, image2: img2 },
-    },
-    {
-      id: "1",
-      name: { name1: "Хельга", name2: "Катерина" },
-      info: {
-        position1: "Викладач дацької мови, бакалавр",
-        position2: "Викладач німецької мови, магістр",
+      {
+        id: "1",
+        name: { name1: "Хельга" },
+        info: {
+          position1: "Викладач дацької мови, бакалавр",
+        },
+        images: { image1: img1 },
       },
-      images: { image1: img2, image2: img3 },
-    },
-    {
-      id: "2",
-      name: { name1: "Катерина", name2: "Агнешка" },
-      info: {
-        position1: "Викладач німецької мови, магістр",
-        position2: "Викладач польської мови, бакалавр",
+      {
+        id: "2",
+        name: { name1: "Ханна" },
+        info: {
+          position1: "Викладач німецької мови, магістр",
+        },
+        images: { image1: img2 },
       },
-      images: { image1: img3, image2: img4 },
-    },
-    {
-      id: "3",
-      name: { name1: "Агнешка", name2: "Ольга" },
-      info: {
-        position1: "Викладач польської мови, бакалавр",
-        position2: "Викладач англійської мови, магістр",
+      {
+        id: "3",
+        name: { name1: "Агнешка" },
+        info: {
+          position1: "Викладач польської мови, бакалавр",
+        },
+        images: { image1: img3 },
       },
-      images: { image1: img4, image2: imgCarousel1 },
-    },
-  ];
+    ],
+    []
+  );
+
+  const carouselPropsMobileVersion: CarouselProps = useMemo(
+    () => ({
+      animation: "slide",
+      interval: undefined,
+      duration: undefined,
+      autoPlay: false,
+      indicators: true,
+      stopAutoPlayOnHover: false,
+      navButtonsAlwaysVisible: false,
+    }),
+    []
+  );
+
+  useEffect(() => {
+    const handleResize = (): void => {
+      if (window.innerWidth < theme.breakpoints.values.sm) {
+        dispatch(setCarouselPropsState(carouselPropsMobileVersion));
+        dispatch(setTeamMembersState(teamMembersMobileVersion));
+      } else {
+        dispatch(setTeamMembersState(teamMembers));
+        dispatch(setCarouselPropsState(carouselProps));
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [
+    dispatch,
+    carouselPropsMobileVersion,
+    teamMembersMobileVersion,
+    theme.breakpoints.values.sm,
+  ]);
 
   return (
     <Box
@@ -77,6 +122,9 @@ const TeamCarousel: React.FC = () => {
         flexDirection: "column",
         [theme.breakpoints.down("md")]: {
           p: "8vw 5px",
+        },
+        [theme.breakpoints.down("sm")]: {
+          p: "8vw 0px",
         },
       }}
     >
@@ -99,12 +147,7 @@ const TeamCarousel: React.FC = () => {
         НАША КОМАНДА
       </Typography>
       <Carousel
-        animation="slide"
-        interval={5000}
-        duration={1000}
-        indicators={true}
-        stopAutoPlayOnHover={true}
-        navButtonsAlwaysVisible={true}
+        {...carouselPropsState}
         PrevIcon={
           <ArrowBackIosIcon
             sx={{
@@ -146,7 +189,7 @@ const TeamCarousel: React.FC = () => {
           },
         }}
       >
-        {teamMembers.map((member, i) => (
+        {teamMembersState.map((member, i) => (
           <TeamMemberItem
             key={i}
             name={member.name}
@@ -162,9 +205,9 @@ const TeamCarousel: React.FC = () => {
 export default TeamCarousel;
 
 interface TeamMemberItemProps {
-  name: { name1: string; name2: string };
-  info: { position1: string; position2: string };
-  images: { image1: string; image2: string };
+  name: { name1: string; name2?: string | undefined };
+  info: { position1: string; position2?: string };
+  images: { image1: string; image2?: string | undefined };
 }
 
 const TeamMemberItem: React.FC<TeamMemberItemProps> = ({
@@ -186,8 +229,16 @@ const TeamMemberItem: React.FC<TeamMemberItemProps> = ({
         [theme.breakpoints.down("lg")]: {
           m: "0 12%",
         },
+        [theme.breakpoints.down("xlg")]: {
+          gap: "1vw",
+        },
         [theme.breakpoints.down("md")]: {
           m: "0 13%",
+          gap: "0.5vw",
+        },
+        [theme.breakpoints.down("sm")]: {
+          m: "0px",
+          height: "55.9vw",
         },
       }}
     >
@@ -196,11 +247,15 @@ const TeamMemberItem: React.FC<TeamMemberItemProps> = ({
         info={info.position1}
         image={images.image1}
       />
-      <TeamMemberCard
-        name={name.name2}
-        info={info.position2}
-        image={images.image2}
-      />
+      {name.name2 !== undefined &&
+        info.position2 !== undefined &&
+        images.image2 !== undefined && (
+          <TeamMemberCard
+            name={name.name2}
+            info={info.position2}
+            image={images.image2}
+          />
+        )}
     </Box>
   );
 };
@@ -217,16 +272,22 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
   image,
 }) => {
   const theme = useTheme();
+
   return (
     <Paper
-      elevation={0}
+      elevation={10}
       sx={{
         display: "flex",
         width: "350px",
         backgroundColor: "#00000000",
         mt: "70px",
+        p: "0.3vw",
         [theme.breakpoints.down("xlg")]: {
           mt: "7vw",
+          p: "0.5vw",
+        },
+        [theme.breakpoints.down("sm")]: {
+          width: "100%",
         },
       }}
     >
@@ -238,15 +299,33 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
           maxWidth: "156px",
           maxHeight: "156px",
           borderRadius: "50%",
-          mr: "20px",
+          mt: "2px",
+          mr: "5%",
+          objectFit: "cover",
           [theme.breakpoints.down("xlg")]: {
-            maxWidth: "15.6vw",
-            maxHeight: "15.6vw",
-            mr: "2vw",
+            maxWidth: "16vw",
+            maxHeight: "16vw",
+          },
+          [theme.breakpoints.down("sm")]: {
+            maxWidth: "42vw",
+            maxHeight: "42vw",
+            m: "auto 2vw",
           },
         }}
       />
-      <CardContent sx={{ flex: "0 1 auto", p: "0px" }}>
+      <CardContent
+        sx={{
+          flex: "0 1 auto",
+          p: "0px",
+          [theme.breakpoints.down("xlg")]: {
+            maxWidth: "15.6vw",
+            maxHeight: "15.6vw",
+          },
+          [theme.breakpoints.down("sm")]: {
+            p: "5px 0px",
+          },
+        }}
+      >
         <Typography
           gutterBottom
           variant="h4"
@@ -258,6 +337,11 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
             [theme.breakpoints.down("xlg")]: {
               fontSize: "3.33vw",
               letterSpacing: "0.2vw",
+            },
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "10vw",
+              letterSpacing: "0.6vw",
+              mt: "0.5vw",
             },
           }}
         >
@@ -276,6 +360,11 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
               fontSize: "2vw",
               letterSpacing: "0.2vw",
               lineHeight: "2.4vw",
+            },
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "6vw",
+              letterSpacing: "0.6vw",
+              lineHeight: "7.2vw",
             },
           }}
         >
