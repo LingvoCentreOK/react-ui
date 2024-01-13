@@ -9,19 +9,12 @@ import {
 } from "@mui/material";
 import Carousel, { ResponsiveType } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { styled } from "@mui/system";
 import imgCarousel1 from "../../assets/images/carousel_block_images/img_carousel_1.jpg";
 import img1 from "../../assets/images/img_1.jpg";
 import img2 from "../../assets/images/img_2.jpg";
 import img3 from "../../assets/images/img_3.jpg";
 import previousArrowIcon from "./icons/previous_arrow_icon.png";
 import nextArrowIcon from "./icons/next_arrow_icon.png";
-
-const StyledCarousel = styled(Carousel)({
-  // Ваші стилі тут
-  // Наприклад:
-  backgroundColor: "red",
-});
 
 const TeamCarousel2: React.FC<{ deviceType?: string }> = ({ deviceType }) => {
   const theme = useTheme();
@@ -81,12 +74,19 @@ const TeamCarousel2: React.FC<{ deviceType?: string }> = ({ deviceType }) => {
     },
   ];
 
-  const CustomArrow: React.FC<{
+  interface CustomArrowProps {
     onClick: () => void;
     retreatFromLeftSide: string | null;
     retreatFromRightSide: string | null;
     arrowIcon: string;
-  }> = ({ onClick, retreatFromLeftSide, retreatFromRightSide, arrowIcon }) => {
+  }
+
+  const CustomArrow: React.FC<CustomArrowProps> = ({
+    onClick,
+    retreatFromLeftSide,
+    retreatFromRightSide,
+    arrowIcon,
+  }) => {
     const theme = useTheme();
     const [isHovered, setIsHovered] = useState(false);
     const [sizeStyle, setSizeStyle] = useState({
@@ -245,9 +245,40 @@ const TeamCarousel2: React.FC<{ deviceType?: string }> = ({ deviceType }) => {
           },
         }}
       >
-        <StyledCarousel
-          swipeable={false}
-          draggable={false}
+        <Box
+          sx={{
+            paddingBottom: "30px",
+            position: "relative",
+          }}
+        >
+          <Carousel
+            additionalTransfrom={0}
+            arrows
+            autoPlaySpeed={3000}
+            centerMode={false}
+            className=""
+            containerClass="container"
+            dotListClass=""
+            draggable
+            focusOnSelect={false}
+            infinite
+            itemClass=""
+            keyBoardControl
+            minimumTouchDrag={80}
+            pauseOnHover
+            renderArrowsWhenDisabled={false}
+            renderButtonGroupOutside={false}
+            showDots
+            renderDotsOutside
+            responsive={responsive}
+            deviceType={deviceType}
+            autoPlay={deviceType !== "mobile" ? true : false}
+            removeArrowOnDeviceType={["mobile"]}
+            //transitionDuration={50}
+            //dotListClass="custom-dot-list-style"
+            //focusOnSelect
+            /* swipeable={true}
+          draggable={true}
           showDots={true}
           responsive={responsive}
           ssr={true} // means to render carousel on server-side.
@@ -257,44 +288,55 @@ const TeamCarousel2: React.FC<{ deviceType?: string }> = ({ deviceType }) => {
           keyBoardControl={true}
           customTransition="all .5"
           transitionDuration={3000}
-          containerClass="carousel-container"
+          containerClass="container"
           removeArrowOnDeviceType={["tablet", "mobile"]}
           deviceType={deviceType}
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
-          //arrows={false}
-
-          //renderButtonGroupOutside={true}
-          customLeftArrow={
-            <CustomArrow
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-              retreatFromLeftSide="0px"
-              retreatFromRightSide={null}
-              arrowIcon={previousArrowIcon}
-            />
-          }
-          customRightArrow={
-            <CustomArrow
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-              retreatFromRightSide="0px"
-              retreatFromLeftSide={null}
-              arrowIcon={nextArrowIcon}
-            />
-          }
-        >
-          {teamMembers.map((member, i) => (
-            <TeamMemberItem
-              key={i}
-              name={member.name}
-              info={member.info}
-              image={member.image}
-            />
-          ))}
-        </StyledCarousel>
+          arrows={true}
+          renderDotsOutside */
+            //renderButtonGroupOutside={true}
+            customLeftArrow={
+              <CustomArrow
+                onClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                retreatFromLeftSide="0px"
+                retreatFromRightSide={null}
+                arrowIcon={previousArrowIcon}
+              />
+            }
+            customRightArrow={
+              <CustomArrow
+                onClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                retreatFromRightSide="0px"
+                retreatFromLeftSide={null}
+                arrowIcon={nextArrowIcon}
+              />
+            }
+            customDot={
+              <CustomDot
+                onClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                active={false}
+                index={0}
+                carouselState={undefined}
+              />
+            }
+          >
+            {teamMembers.map((member, i) => (
+              <TeamMemberItem
+                key={i}
+                name={member.name}
+                info={member.info}
+                image={member.image}
+              />
+            ))}
+          </Carousel>
+        </Box>
       </Box>
     </Box>
   );
@@ -338,11 +380,23 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
         backgroundColor: "#00000000",
         p: "0.3vw",
         m: "0 auto",
+        ml: "9vw",
+        cursor: "pointer",
+        [theme.breakpoints.down("lg")]: {
+          ml: "8vw",
+        },
+        [theme.breakpoints.down("lg")]: {
+          ml: "7vw",
+        },
+        [theme.breakpoints.down("mlg")]: {
+          ml: "5vw",
+        },
         [theme.breakpoints.down("xlg")]: {
           p: "0.5vw",
         },
         [theme.breakpoints.down("sm")]: {
           width: "100%",
+          m: "0 auto",
         },
       }}
     >
@@ -396,8 +450,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
             },
             [theme.breakpoints.down("sm")]: {
               fontSize: "10vw",
-              letterSpacing: "0.6vw",
-              mt: "0.5vw",
+              letterSpacing: "0vw",
+              mt: "0vw",
             },
           }}
         >
@@ -420,8 +474,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
             },
             [theme.breakpoints.down("sm")]: {
               fontSize: "6vw",
-              letterSpacing: "0.6vw",
-              lineHeight: "7.2vw",
+              letterSpacing: "0.4vw",
+              lineHeight: "6.2vw",
             },
           }}
         >
@@ -429,5 +483,85 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
         </Typography>
       </CardContent>
     </Paper>
+  );
+};
+
+interface CustomDotProps {
+  onClick: () => void;
+  active: boolean;
+  index: number;
+  carouselState: any;
+}
+
+const CustomDot: React.FC<CustomDotProps> = ({ onClick, active }) => {
+  const theme = useTheme();
+  const handleClick = (): void => {
+    onClick();
+  };
+
+  const [dotsStyle, setDotsStyle] = useState({
+    padding: "7px",
+  });
+
+  useEffect(() => {
+    const handleResize = (): void => {
+      if (window.innerWidth < theme.breakpoints.values.xl) {
+        setDotsStyle({
+          padding: "6px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.lg) {
+        setDotsStyle({
+          padding: "6px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.mlg) {
+        setDotsStyle({
+          padding: "5px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.xlg) {
+        setDotsStyle({
+          padding: "4px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.md) {
+        setDotsStyle({
+          padding: "3px",
+        });
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [
+    theme.breakpoints.values.xl,
+    theme.breakpoints.values.lg,
+    theme.breakpoints.values.mlg,
+    theme.breakpoints.values.xlg,
+    theme.breakpoints.values.md,
+  ]);
+
+  return (
+    <button
+      style={{
+        backgroundColor: active ? "rgba(204,204,204)" : "rgba(0,0,0,0.4)",
+        margin: "0 5px",
+        ...dotsStyle,
+        cursor: "pointer",
+        borderRadius: active ? "25%" : "90%",
+        display: "inline-block",
+        border: active
+          ? "1.5px solid rgba(0,0,0,0.6)"
+          : "1px solid rgba(255,255,255)",
+        boxShadow: "2px 2px 4px #000000",
+      }}
+      onClick={handleClick}
+    />
   );
 };
