@@ -1,123 +1,218 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   CardMedia,
   Typography,
+  Paper,
   CardContent,
   useTheme,
 } from "@mui/material";
-import Carousel from "react-material-ui-carousel";
-import { Paper } from "@mui/material";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useAppDispatch } from "../../hooks";
-import { useAppSelector } from "../../hooks";
-import {
-  setTeamMembersState,
-  teamMembers,
-  TeamMember,
-  setCarouselPropsState,
-  carouselProps,
-  CarouselProps,
-} from "../../store/rootSlice";
+import Carousel, { ResponsiveType } from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import imgCarousel1 from "../../assets/images/carousel_block_images/img_carousel_1.jpg";
 import img1 from "../../assets/images/img_1.jpg";
 import img2 from "../../assets/images/img_2.jpg";
 import img3 from "../../assets/images/img_3.jpg";
+import previousArrowIcon from "./icons/previous_arrow_icon.png";
+import nextArrowIcon from "./icons/next_arrow_icon.png";
 
-const TeamCarousel: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const teamMembersState = useAppSelector(
-    (state) => state.reducer.teamMembersState
-  );
-  const carouselPropsState = useAppSelector(
-    (state) => state.reducer.carouselPropsState
-  );
+interface TeamCarouselProps {
+  deviceType?: string;
+}
+
+interface TeamMember {
+  id?: string;
+  name: string;
+  info: string;
+  image: string;
+}
+
+const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
   const theme = useTheme();
+  const responsive: ResponsiveType = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3001 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1025 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 430 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 429, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    },
+  };
 
-  const teamMembersMobileVersion: TeamMember[] = useMemo(
-    () => [
-      {
-        id: "0",
-        name: { name1: "Ольга" },
-        info: {
-          position1: "Викладач англійської мови, магістр",
-        },
-        images: { image1: imgCarousel1 },
-      },
-      {
-        id: "1",
-        name: { name1: "Хельга" },
-        info: {
-          position1: "Викладач дацької мови, бакалавр",
-        },
-        images: { image1: img1 },
-      },
-      {
-        id: "2",
-        name: { name1: "Ханна" },
-        info: {
-          position1: "Викладач німецької мови, магістр",
-        },
-        images: { image1: img2 },
-      },
-      {
-        id: "3",
-        name: { name1: "Агнешка" },
-        info: {
-          position1: "Викладач польської мови, бакалавр",
-        },
-        images: { image1: img3 },
-      },
-    ],
-    []
-  );
+  const teamMembersData: TeamMember[] = [
+    {
+      id: "0",
+      name: "Ольга",
+      info: "Викладач англійської мови, магістр",
+      image: imgCarousel1,
+    },
+    {
+      id: "1",
+      name: "Хельга",
+      info: "Викладач дацької мови, бакалавр",
+      image: img1,
+    },
+    {
+      id: "2",
+      name: "Ханна",
+      info: "Викладач німецької мови, магістр",
+      image: img2,
+    },
+    {
+      id: "3",
+      name: "Божена",
+      info: "Викладач польської мови, бакалавр",
+      image: img3,
+    },
+  ];
 
-  const carouselPropsMobileVersion: CarouselProps = useMemo(
-    () => ({
-      animation: "slide",
-      interval: undefined,
-      duration: undefined,
-      autoPlay: false,
-      indicators: true,
-      stopAutoPlayOnHover: false,
-      navButtonsAlwaysVisible: false,
-    }),
-    []
-  );
+  interface CustomArrowProps {
+    onClick: () => void;
+    retreatFromLeftSide: string | null;
+    retreatFromRightSide: string | null;
+    arrowIcon: string;
+  }
 
-  useEffect(() => {
-    const handleResize = (): void => {
-      if (window.innerWidth < theme.breakpoints.values.sm) {
-        dispatch(setCarouselPropsState(carouselPropsMobileVersion));
-        dispatch(setTeamMembersState(teamMembersMobileVersion));
-      } else {
-        dispatch(setTeamMembersState(teamMembers));
-        dispatch(setCarouselPropsState(carouselProps));
-      }
+  const CustomArrow: React.FC<CustomArrowProps> = ({
+    onClick,
+    retreatFromLeftSide,
+    retreatFromRightSide,
+    arrowIcon,
+  }) => {
+    const theme = useTheme();
+    const [isHovered, setIsHovered] = useState(false);
+
+    const arrowStyles = {
+      arrowBackgroundPhoneSize: {
+        minWidth: "94px",
+        minHeight: "94px",
+      },
+      arrowSize: {
+        width: "64px",
+        height: "64px",
+      },
     };
+    const [sizeStyle, setSizeStyle] = useState(arrowStyles);
 
-    handleResize();
+    useEffect(() => {
+      const handleResize = (): void => {
+        if (window.innerWidth < theme.breakpoints.values.xl) {
+          setSizeStyle({
+            arrowBackgroundPhoneSize: {
+              minWidth: "64px",
+              minHeight: "64px",
+            },
+            arrowSize: {
+              width: "44px",
+              height: "44px",
+            },
+          });
+        }
+        if (window.innerWidth < theme.breakpoints.values.lg) {
+          setSizeStyle({
+            arrowBackgroundPhoneSize: {
+              minWidth: "54px",
+              minHeight: "54px",
+            },
+            arrowSize: {
+              width: "34px",
+              height: "34px",
+            },
+          });
+        }
+        if (window.innerWidth < theme.breakpoints.values.mlg) {
+          setSizeStyle({
+            arrowBackgroundPhoneSize: {
+              minWidth: "44px",
+              minHeight: "44px",
+            },
+            arrowSize: {
+              width: "24px",
+              height: "24px",
+            },
+          });
+        }
+        if (window.innerWidth >= theme.breakpoints.values.xl) {
+          setSizeStyle({
+            arrowBackgroundPhoneSize: {
+              minWidth: "94px",
+              minHeight: "94px",
+            },
+            arrowSize: {
+              width: "64px",
+              height: "64px",
+            },
+          });
+        }
+      };
 
-    window.addEventListener("resize", handleResize);
+      handleResize();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [
-    dispatch,
-    carouselPropsMobileVersion,
-    teamMembersMobileVersion,
-    theme.breakpoints.values.sm,
-  ]);
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, [
+      theme.breakpoints.values.xl,
+      theme.breakpoints.values.lg,
+      theme.breakpoints.values.mlg,
+    ]);
+
+    return (
+      <button
+        onClick={() => onClick()}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={
+          {
+            position: "absolute",
+            outline: "0",
+            borderRadius: "50%",
+            zIndex: "1000",
+            background: isHovered ? "rgba(0,0,0,0.9)" : "rgba(0,0,0,0.4)",
+            transition: `all 0.5s ${isHovered ? "0.05s" : "0s"}`,
+            color: `${theme.palette.primary.contrastText}`,
+            left: `${retreatFromLeftSide}`,
+            right: `${retreatFromRightSide}`,
+            border: "0",
+            cursor: "pointer",
+            ...sizeStyle.arrowBackgroundPhoneSize,
+          } as React.CSSProperties
+        }
+      >
+        <img
+          src={arrowIcon}
+          alt="Next Arrow"
+          style={{
+            objectFit: "contain",
+            ...sizeStyle.arrowSize,
+          }}
+        />
+      </button>
+    );
+  };
 
   return (
     <Box
       sx={{
         background: "linear-gradient(200deg, #8674AA, #8674aa, #8674aa66)",
         p: "87px 5px 78px",
+        textAlign: "center",
         display: "flex",
-        justifyContent: "space-around",
         alignItems: "center",
         flexDirection: "column",
         [theme.breakpoints.down("md")]: {
@@ -139,6 +234,7 @@ const TeamCarousel: React.FC = () => {
           lineHeight: "56px",
           textAlign: "justify",
           color: "primary.contrastText",
+          mb: "8vw",
           [theme.breakpoints.down("md")]: {
             fontSize: "4.8vw",
           },
@@ -146,148 +242,132 @@ const TeamCarousel: React.FC = () => {
       >
         НАША КОМАНДА
       </Typography>
-      <Carousel
-        {...carouselPropsState}
-        PrevIcon={
-          <ArrowBackIosIcon
-            sx={{
-              m: "0 auto",
-              p: "0 0 0 15%",
-              width: "64px",
-              height: "64px",
-              backgroundColor: "#00000000",
-              [theme.breakpoints.down("md")]: {
-                width: "4.4vw",
-                height: "4.4vw",
-              },
-            }}
-          />
-        }
-        NextIcon={
-          <ArrowForwardIosIcon
-            sx={{
-              m: "0 auto",
-              p: "0 0 0 15%",
-              width: "64px",
-              height: "64px",
-              backgroundColor: "#00000000",
-              [theme.breakpoints.down("md")]: {
-                width: "4.4vw",
-                height: "4.4vw",
-              },
-            }}
-          />
-        }
+      <Box
         sx={{
+          display: "inline-block",
           width: "86%",
           maxWidth: "1490px",
           [theme.breakpoints.down("lg")]: {
-            width: "94%",
-          },
-          [theme.breakpoints.down("xmd")]: {
-            width: "96%",
+            width: "86%",
           },
         }}
       >
-        {teamMembersState.map((member, i) => (
-          <TeamMemberItem
-            key={i}
-            name={member.name}
-            info={member.info}
-            images={member.images}
-          />
-        ))}
-      </Carousel>
+        <Box
+          sx={{
+            paddingBottom: "30px",
+            position: "relative",
+          }}
+        >
+          <Carousel
+            arrows
+            autoPlaySpeed={3000}
+            centerMode={false}
+            className=""
+            containerClass="container-with-dots"
+            dotListClass=""
+            draggable
+            focusOnSelect={false}
+            infinite
+            itemClass=""
+            keyBoardControl
+            minimumTouchDrag={80}
+            pauseOnHover
+            renderArrowsWhenDisabled={false}
+            renderButtonGroupOutside={false}
+            showDots
+            renderDotsOutside
+            rewind={false}
+            rewindWithAnimation={false}
+            rtl={false}
+            shouldResetAutoplay
+            sliderClass=""
+            slidesToSlide={1}
+            swipeable
+            responsive={responsive}
+            deviceType={deviceType}
+            autoPlay={deviceType !== "mobile" ? true : false}
+            removeArrowOnDeviceType={["mobile"]}
+            customLeftArrow={
+              <CustomArrow
+                onClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                retreatFromLeftSide="0px"
+                retreatFromRightSide={null}
+                arrowIcon={previousArrowIcon}
+              />
+            }
+            customRightArrow={
+              <CustomArrow
+                onClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                retreatFromRightSide="0px"
+                retreatFromLeftSide={null}
+                arrowIcon={nextArrowIcon}
+              />
+            }
+            customDot={
+              <CustomDot
+                onClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                active={false}
+                index={0}
+                carouselState={undefined}
+              />
+            }
+          >
+            {teamMembersData.map((member, i) => (
+              <TeamMemberItem
+                key={i}
+                name={member.name}
+                info={member.info}
+                image={member.image}
+              />
+            ))}
+          </Carousel>
+        </Box>
+      </Box>
     </Box>
   );
 };
 
 export default TeamCarousel;
 
-interface TeamMemberItemProps {
-  name: { name1: string; name2?: string | undefined };
-  info: { position1: string; position2?: string };
-  images: { image1: string; image2?: string | undefined };
-}
-
-const TeamMemberItem: React.FC<TeamMemberItemProps> = ({
-  name,
-  info,
-  images,
-}) => {
-  const theme = useTheme();
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        m: "0 18%",
-        maxWidth: "1004px",
-        [theme.breakpoints.down("xl")]: {
-          m: "0 15%",
-        },
-        [theme.breakpoints.down("lg")]: {
-          m: "0 12%",
-        },
-        [theme.breakpoints.down("xlg")]: {
-          gap: "1vw",
-        },
-        [theme.breakpoints.down("md")]: {
-          m: "0 13%",
-          gap: "0.5vw",
-        },
-        [theme.breakpoints.down("sm")]: {
-          m: "0px",
-          height: "55.9vw",
-        },
-      }}
-    >
-      <TeamMemberCard
-        name={name.name1}
-        info={info.position1}
-        image={images.image1}
-      />
-      {name.name2 !== undefined &&
-        info.position2 !== undefined &&
-        images.image2 !== undefined && (
-          <TeamMemberCard
-            name={name.name2}
-            info={info.position2}
-            image={images.image2}
-          />
-        )}
-    </Box>
-  );
+const TeamMemberItem: React.FC<TeamMember> = ({ name, info, image }) => {
+  return <TeamMemberCard name={name} info={info} image={image} />;
 };
 
-interface TeamMemberCardProps {
-  name: string;
-  info: string;
-  image: string;
-}
-
-const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
-  name,
-  info,
-  image,
-}) => {
+const TeamMemberCard: React.FC<TeamMember> = ({ name, info, image }) => {
   const theme = useTheme();
 
   return (
     <Paper
-      elevation={10}
+      elevation={0}
       sx={{
         display: "flex",
         width: "350px",
         backgroundColor: "#00000000",
-        mt: "70px",
         p: "0.3vw",
+        m: "0 auto",
+        ml: "11vw",
+        cursor: "pointer",
+        [theme.breakpoints.down("lg")]: {
+          ml: "8vw",
+        },
+        [theme.breakpoints.down("lg")]: {
+          ml: "7vw",
+        },
+        [theme.breakpoints.down("mlg")]: {
+          ml: "5vw",
+        },
         [theme.breakpoints.down("xlg")]: {
-          mt: "7vw",
           p: "0.5vw",
         },
         [theme.breakpoints.down("sm")]: {
           width: "100%",
+          m: "0 auto",
         },
       }}
     >
@@ -334,14 +414,15 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
             m: "0px",
             fontFamily: "Maven Pro, sans-serif",
             letterSpacing: "2px",
+            textAlign: "left",
             [theme.breakpoints.down("xlg")]: {
               fontSize: "3.33vw",
               letterSpacing: "0.2vw",
             },
             [theme.breakpoints.down("sm")]: {
               fontSize: "10vw",
-              letterSpacing: "0.6vw",
-              mt: "0.5vw",
+              letterSpacing: "0vw",
+              mt: "0vw",
             },
           }}
         >
@@ -356,6 +437,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
             fontWeight: "400",
             fontFamily: "Maven Pro, sans-serif",
             letterSpacing: "2px",
+            textAlign: "left",
             [theme.breakpoints.down("xlg")]: {
               fontSize: "2vw",
               letterSpacing: "0.2vw",
@@ -363,8 +445,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
             },
             [theme.breakpoints.down("sm")]: {
               fontSize: "6vw",
-              letterSpacing: "0.6vw",
-              lineHeight: "7.2vw",
+              letterSpacing: "0.4vw",
+              lineHeight: "6.2vw",
             },
           }}
         >
@@ -372,5 +454,86 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
         </Typography>
       </CardContent>
     </Paper>
+  );
+};
+
+interface CustomDotProps {
+  onClick: () => void;
+  active: boolean;
+  index: number;
+  carouselState: any;
+}
+
+const CustomDot: React.FC<CustomDotProps> = ({ onClick, active }) => {
+  const theme = useTheme();
+  const handleClick = (): void => {
+    onClick();
+  };
+
+  const dotsStyles = {
+    padding: "7px",
+  };
+  const [dotsStyle, setDotsStyle] = useState(dotsStyles);
+
+  useEffect(() => {
+    const handleResize = (): void => {
+      if (window.innerWidth < theme.breakpoints.values.xl) {
+        setDotsStyle({
+          padding: "6px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.lg) {
+        setDotsStyle({
+          padding: "6px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.mlg) {
+        setDotsStyle({
+          padding: "5px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.xlg) {
+        setDotsStyle({
+          padding: "4px",
+        });
+      }
+      if (window.innerWidth < theme.breakpoints.values.md) {
+        setDotsStyle({
+          padding: "3px",
+        });
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [
+    theme.breakpoints.values.xl,
+    theme.breakpoints.values.lg,
+    theme.breakpoints.values.mlg,
+    theme.breakpoints.values.xlg,
+    theme.breakpoints.values.md,
+  ]);
+
+  return (
+    <button
+      style={{
+        backgroundColor: active ? "rgba(204,204,204)" : "rgba(0,0,0,0.4)",
+        margin: "0 5px",
+        ...dotsStyle,
+        cursor: "pointer",
+        borderRadius: active ? "25%" : "90%",
+        display: "inline-block",
+        border: active
+          ? "1.5px solid rgba(0,0,0,0.6)"
+          : "1px solid rgba(255,255,255)",
+        boxShadow: "2px 2px 4px #000000",
+      }}
+      onClick={handleClick}
+    />
   );
 };
