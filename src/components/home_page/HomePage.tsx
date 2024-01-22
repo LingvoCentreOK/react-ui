@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
 import ParallaxLogo from "./ParallaxLogo";
 import OrganizationInfoBlock from "../organization_info_block/OrganizationInfoBlock";
@@ -10,6 +11,9 @@ import { useTheme } from "@mui/material";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const componentsTitlesState = useAppSelector(
+    (state) => state.reducer.componentsTitlesState
+  );
   const theme = useTheme();
 
   useEffect(() => {
@@ -65,7 +69,7 @@ const HomePage: React.FC = () => {
             },
           }}
         >
-          Зв'язатись з нами
+          {componentsTitlesState.homePageTitles.buttonTitle}
         </Button>
       </Box>
       <OrganizationInfoBlock />

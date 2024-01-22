@@ -7,6 +7,7 @@ import {
   CardContent,
   useTheme,
 } from "@mui/material";
+import { useAppSelector } from "../../hooks";
 import Carousel, { ResponsiveType } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import imgCarousel1 from "../../assets/images/carousel_block_images/img_carousel_1.jpg";
@@ -29,6 +30,9 @@ interface TeamMember {
 
 const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
   const theme = useTheme();
+  const componentsTitlesState = useAppSelector(
+    (state) => state.reducer.componentsTitlesState
+  );
   const responsive: ResponsiveType = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3001 },
@@ -93,7 +97,6 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
     arrowIcon,
   }) => {
     const theme = useTheme();
-    const [isHovered, setIsHovered] = useState(false);
 
     const arrowStyles = {
       arrowBackgroundPhoneSize: {
@@ -175,16 +178,12 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
     return (
       <button
         onClick={() => onClick()}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         style={
           {
             position: "absolute",
             outline: "0",
-            borderRadius: "50%",
             zIndex: "1000",
-            background: isHovered ? "rgba(0,0,0,0.9)" : "rgba(0,0,0,0.4)",
-            transition: `all 0.5s ${isHovered ? "0.05s" : "0s"}`,
+            background: "rgba(0,0,0,0)",
             color: `${theme.palette.primary.contrastText}`,
             left: `${retreatFromLeftSide}`,
             right: `${retreatFromRightSide}`,
@@ -240,7 +239,7 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
           },
         }}
       >
-        НАША КОМАНДА
+        {componentsTitlesState.teamCarouselTitle}
       </Typography>
       <Box
         sx={{
@@ -274,8 +273,6 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
             pauseOnHover
             renderArrowsWhenDisabled={false}
             renderButtonGroupOutside={false}
-            showDots
-            renderDotsOutside
             rewind={false}
             rewindWithAnimation={false}
             rtl={false}
@@ -305,16 +302,6 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
                 retreatFromRightSide="0px"
                 retreatFromLeftSide={null}
                 arrowIcon={nextArrowIcon}
-              />
-            }
-            customDot={
-              <CustomDot
-                onClick={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                active={false}
-                index={0}
-                carouselState={undefined}
               />
             }
           >
@@ -454,86 +441,5 @@ const TeamMemberCard: React.FC<TeamMember> = ({ name, info, image }) => {
         </Typography>
       </CardContent>
     </Paper>
-  );
-};
-
-interface CustomDotProps {
-  onClick: () => void;
-  active: boolean;
-  index: number;
-  carouselState: any;
-}
-
-const CustomDot: React.FC<CustomDotProps> = ({ onClick, active }) => {
-  const theme = useTheme();
-  const handleClick = (): void => {
-    onClick();
-  };
-
-  const dotsStyles = {
-    padding: "7px",
-  };
-  const [dotsStyle, setDotsStyle] = useState(dotsStyles);
-
-  useEffect(() => {
-    const handleResize = (): void => {
-      if (window.innerWidth < theme.breakpoints.values.xl) {
-        setDotsStyle({
-          padding: "6px",
-        });
-      }
-      if (window.innerWidth < theme.breakpoints.values.lg) {
-        setDotsStyle({
-          padding: "6px",
-        });
-      }
-      if (window.innerWidth < theme.breakpoints.values.mlg) {
-        setDotsStyle({
-          padding: "5px",
-        });
-      }
-      if (window.innerWidth < theme.breakpoints.values.xlg) {
-        setDotsStyle({
-          padding: "4px",
-        });
-      }
-      if (window.innerWidth < theme.breakpoints.values.md) {
-        setDotsStyle({
-          padding: "3px",
-        });
-      }
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [
-    theme.breakpoints.values.xl,
-    theme.breakpoints.values.lg,
-    theme.breakpoints.values.mlg,
-    theme.breakpoints.values.xlg,
-    theme.breakpoints.values.md,
-  ]);
-
-  return (
-    <button
-      style={{
-        backgroundColor: active ? "rgba(204,204,204)" : "rgba(0,0,0,0.4)",
-        margin: "0 5px",
-        ...dotsStyle,
-        cursor: "pointer",
-        borderRadius: active ? "25%" : "90%",
-        display: "inline-block",
-        border: active
-          ? "1.5px solid rgba(0,0,0,0.6)"
-          : "1px solid rgba(255,255,255)",
-        boxShadow: "2px 2px 4px #000000",
-      }}
-      onClick={handleClick}
-    />
   );
 };

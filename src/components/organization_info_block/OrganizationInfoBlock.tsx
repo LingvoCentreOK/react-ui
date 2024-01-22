@@ -12,6 +12,9 @@ const OrganizationInfoBlock: React.FC = () => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const images = useAppSelector((state) => state.reducer.images);
+  const componentsTitlesState = useAppSelector(
+    (state) => state.reducer.componentsTitlesState
+  );
 
   useEffect(() => {
     const handleResize = (): void => {
@@ -139,8 +142,7 @@ const OrganizationInfoBlock: React.FC = () => {
               },
             }}
           >
-            Компанія заснована в 2008 році. За цей час більше 5000 клієнтів
-            залишились задоволені нашими послугами
+            {componentsTitlesState.organizationInfoBlockInfos.firstInfo}
           </Typography>
         </Grid>
         <Grid
@@ -181,8 +183,7 @@ const OrganizationInfoBlock: React.FC = () => {
               },
             }}
           >
-            Більше половини із наших клієнтів виїхали і проживають за кордоном
-            зараз
+            {componentsTitlesState.organizationInfoBlockInfos.secondInfo}
           </Typography>
         </Grid>
         <Grid

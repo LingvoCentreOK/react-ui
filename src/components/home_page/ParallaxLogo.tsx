@@ -15,12 +15,14 @@ import italyFlag from "./icons/italy.png";
 import polandFlag from "./icons/poland.png";
 
 const ParallaxLogo: React.FC = () => {
-  const dispatch = useAppDispatch();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const componentsTitlesState = useAppSelector(
+    (state) => state.reducer.componentsTitlesState
+  );
   const isParallaxEnabled = useAppSelector(
     (state) => state.reducer.isParallaxEnabled
   );
-
   useEffect(() => {
     const handleResize = (): void => {
       if (window.innerWidth < theme.breakpoints.values.md) {
@@ -94,7 +96,7 @@ const ParallaxLogo: React.FC = () => {
             },
           }}
         >
-          LINGVOCENTRE OK -
+          {componentsTitlesState.homePageTitles.title}
         </Typography>
         <Typography
           sx={{
@@ -122,7 +124,7 @@ const ParallaxLogo: React.FC = () => {
             },
           }}
         >
-          Ми провадимо якісну мовну освіту
+          {componentsTitlesState.homePageTitles.subtitle}
         </Typography>
       </Box>
 

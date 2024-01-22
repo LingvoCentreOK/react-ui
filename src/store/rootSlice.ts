@@ -4,6 +4,34 @@ import img1 from "../assets/images/img_1.jpg";
 import img2 from "../assets/images/img_2.jpg";
 import img3 from "../assets/images/img_3.jpg";
 
+export type ComponentsTitles = {
+  homePageTitles: {
+    title: string;
+    subtitle: string;
+    buttonTitle: string;
+  };
+  organizationInfoBlockInfos: {
+    firstInfo: string;
+    secondInfo: string;
+  };
+  teamCarouselTitle: string;
+};
+
+export const componentsTitles: ComponentsTitles = {
+  homePageTitles: {
+    title: "LINGVOCENTRE OK -",
+    subtitle: "Ми провадимо якісну мовну освіту",
+    buttonTitle: "Зв'язатись з нами",
+  },
+  organizationInfoBlockInfos: {
+    firstInfo:
+      "Компанія заснована в 2008 році. За цей час більше 5000 клієнтів залишились задоволені нашими послугами",
+    secondInfo:
+      "Більше половини із наших клієнтів виїхали і проживають за кордоном зараз",
+  },
+  teamCarouselTitle: "КОМАНДА",
+};
+
 export type TeamMember = {
   id: string;
   name: { name1: string; name2?: string | undefined };
@@ -53,40 +81,20 @@ export const teamMembers: TeamMember[] = [
   },
 ];
 
-export type CarouselProps = {
-  animation: "slide" | "fade";
-  interval: number | undefined;
-  duration: number | undefined;
-  autoPlay: boolean;
-  indicators: boolean;
-  stopAutoPlayOnHover: boolean;
-  navButtonsAlwaysVisible: boolean;
-};
-
-export const carouselProps: CarouselProps = {
-  animation: "slide",
-  interval: 5000,
-  duration: 1000,
-  autoPlay: true,
-  indicators: true,
-  stopAutoPlayOnHover: true,
-  navButtonsAlwaysVisible: true,
-};
-
 type InitialState = {
+  componentsTitlesState: ComponentsTitles;
   isTextVisible: boolean;
   images: string[];
   isParallaxEnabled: boolean;
   teamMembersState: TeamMember[];
-  carouselPropsState: CarouselProps;
 };
 
 const initialState: InitialState = {
+  componentsTitlesState: componentsTitles,
   isTextVisible: false,
   images: [img1, img2],
   isParallaxEnabled: true,
   teamMembersState: teamMembers,
-  carouselPropsState: carouselProps,
 };
 
 const rootSlice = createSlice({
@@ -105,9 +113,6 @@ const rootSlice = createSlice({
     setTeamMembersState(state, action: PayloadAction<TeamMember[]>) {
       state.teamMembersState = action.payload;
     },
-    setCarouselPropsState(state, action: PayloadAction<CarouselProps>) {
-      state.carouselPropsState = action.payload;
-    },
   },
 });
 
@@ -116,6 +121,5 @@ export const {
   setImages,
   setIsParallaxEnabled,
   setTeamMembersState,
-  setCarouselPropsState,
 } = rootSlice.actions;
 export default rootSlice.reducer;
