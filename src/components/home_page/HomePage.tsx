@@ -2,11 +2,19 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
-import { ParallaxLogo } from "./ParallaxLogo";
+import ParallaxLogo from "./ParallaxLogo";
+import OrganizationInfoBlock from "../organization_info_block/OrganizationInfoBlock";
+import TeamCarousel from "../team_carousel/TeamCarousel";
+import { useTheme } from "@mui/material";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const componentsTitlesState = useAppSelector(
+    (state) => state.reducer.componentsTitlesState
+  );
+  const theme = useTheme();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -27,10 +35,11 @@ const HomePage: React.FC = () => {
           alignItems: "center",
           background: "linear-gradient(160deg, #CDA5F3, #A6B8F3)",
           opacity: "0.6",
+          boxSizing: "border-box",
           overflow: "hidden",
         }}
       >
-        <ParallaxLogo></ParallaxLogo>
+        <ParallaxLogo />
         <Button
           variant="outlined"
           size="large"
@@ -52,25 +61,19 @@ const HomePage: React.FC = () => {
               background: "linear-gradient(90deg, #ff8177, #8437fd)",
               color: "primary.contrastText",
             },
+            [theme.breakpoints.down("md")]: {
+              width: "380px",
+            },
+            [theme.breakpoints.down("xmd")]: {
+              width: "340px",
+            },
           }}
         >
-          Зв'язатись з нами
+          {componentsTitlesState.homePageTitles.buttonTitle}
         </Button>
       </Box>
-      <Box
-        sx={{
-          p: "200px 0px",
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          opacity: "0.6",
-          background: "linear-gradient(160deg, #A6B8F3, #CDA5F3)",
-        }}
-      >
-        <p>Example second block</p>
-      </Box>
+      <OrganizationInfoBlock />
+      <TeamCarousel />
     </Box>
   );
 };

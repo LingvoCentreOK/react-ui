@@ -1,9 +1,12 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { Box, Typography, useTheme } from "@mui/material";
 import {
   MouseParallaxChild,
   MouseParallaxContainer,
 } from "react-parallax-mouse";
+import { useAppDispatch } from "../../hooks";
+import { useAppSelector } from "../../hooks";
+import { setIsParallaxEnabled } from "../../store/rootSlice";
 import canadaFlag from "./icons/canada.png";
 import usaFlag from "./icons/united-states-of-america.png";
 import britainFlag from "./icons/united-kingdom.png";
@@ -11,7 +14,33 @@ import germanyFlag from "./icons/germany.png";
 import italyFlag from "./icons/italy.png";
 import polandFlag from "./icons/poland.png";
 
-export function ParallaxLogo(): JSX.Element {
+const ParallaxLogo: React.FC = () => {
+  const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const componentsTitlesState = useAppSelector(
+    (state) => state.reducer.componentsTitlesState
+  );
+  const isParallaxEnabled = useAppSelector(
+    (state) => state.reducer.isParallaxEnabled
+  );
+  useEffect(() => {
+    const handleResize = (): void => {
+      if (window.innerWidth < theme.breakpoints.values.md) {
+        dispatch(setIsParallaxEnabled(false));
+      } else {
+        dispatch(setIsParallaxEnabled(true));
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [dispatch, theme.breakpoints.values.md]);
+
   return (
     <MouseParallaxContainer
       globalFactorX={0.1}
@@ -23,6 +52,7 @@ export function ParallaxLogo(): JSX.Element {
         display: "flex",
         justifyContent: "center",
       }}
+      enabled={isParallaxEnabled}
       resetOnLeave
     >
       <Box
@@ -41,14 +71,32 @@ export function ParallaxLogo(): JSX.Element {
             fontSize: "64px",
             fontWeight: "600",
             color: "primary.contrastText",
-            marginTop: "30%",
+            marginTop: "28%",
             cursor: "default",
             background: "-webkit-linear-gradient(0deg, #ff8177, #8437fd)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
+            [theme.breakpoints.down("lg")]: {
+              fontSize: "50px",
+              marginTop: "40%",
+              lineHeight: "48px",
+            },
+            [theme.breakpoints.down("md")]: {
+              fontSize: "40px",
+              marginTop: "50%",
+            },
+            [theme.breakpoints.down("xmd")]: {
+              fontSize: "32px",
+              marginTop: "72%",
+              lineHeight: "30px",
+            },
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "30px",
+              marginTop: "80%",
+            },
           }}
         >
-          LINGVOCENTRE OK -
+          {componentsTitlesState.homePageTitles.title}
         </Typography>
         <Typography
           sx={{
@@ -62,9 +110,21 @@ export function ParallaxLogo(): JSX.Element {
             lineHeight: "76px",
             margin: "0 auto",
             cursor: "default",
+            [theme.breakpoints.down("lg")]: {
+              fontSize: "38px",
+            },
+            [theme.breakpoints.down("md")]: {
+              fontSize: "30px",
+            },
+            [theme.breakpoints.down("xmd")]: {
+              fontSize: "22px",
+            },
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "20px",
+            },
           }}
         >
-          Ми провадимо якісну мовну освіту
+          {componentsTitlesState.homePageTitles.subtitle}
         </Typography>
       </Box>
 
@@ -149,4 +209,6 @@ export function ParallaxLogo(): JSX.Element {
       </MouseParallaxChild>
     </MouseParallaxContainer>
   );
-}
+};
+
+export default ParallaxLogo;
