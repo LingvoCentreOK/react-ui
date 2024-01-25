@@ -3,10 +3,10 @@ import { Grid, Typography, CardMedia, Box, useTheme } from "@mui/material";
 import { useAppDispatch } from "../../hooks";
 import { useAppSelector } from "../../hooks";
 import { setImages } from "../../store/rootSlice";
-import img1 from "../../assets/images/img_1.jpg";
-import img2 from "../../assets/images/img_2.jpg";
-import img3 from "../../assets/images/img_3.jpg";
-import img4 from "../../assets/images/img_4.jpg";
+import img1 from "../../assets/images/organization_info_block_images/img_1.jpg";
+import img2 from "../../assets/images/organization_info_block_images/img_2.jpg";
+import img3 from "../../assets/images/organization_info_block_images/img_3.jpg";
+import img4 from "../../assets/images/organization_info_block_images/img_4.jpg";
 
 const OrganizationInfoBlock: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,11 +18,9 @@ const OrganizationInfoBlock: React.FC = () => {
 
   useEffect(() => {
     const handleResize = (): void => {
-      if (window.innerWidth < theme.breakpoints.values.sm) {
-        dispatch(setImages([...[img3, img4]]));
-      } else {
-        dispatch(setImages([...[img1, img2]]));
-      }
+      window.innerWidth < theme.breakpoints.values.sm
+        ? dispatch(setImages([...[img3, img4]]))
+        : dispatch(setImages([...[img1, img2]]));
     };
 
     handleResize();
@@ -33,6 +31,21 @@ const OrganizationInfoBlock: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [dispatch, theme.breakpoints.values.sm]);
+
+  const textStyles = {
+    WebkitTextSizeAdjust: "100%",
+    WebkitFontSmoothing: "antialiased",
+    textRendering: "optimizeLegibility",
+    WebkitBoxDirection: "normal",
+    fontSize: "40px",
+    fontWeight: "400",
+    lineHeight: "46px",
+    textAlign: "justify",
+    color: "primary.contrastText",
+    margin: "0 auto",
+    cursor: "default",
+    maxWidth: "530px",
+  };
 
   return (
     <Box
@@ -116,18 +129,7 @@ const OrganizationInfoBlock: React.FC = () => {
         >
           <Typography
             sx={{
-              WebkitTextSizeAdjust: "100%",
-              WebkitFontSmoothing: "antialiased",
-              textRendering: "optimizeLegibility",
-              WebkitBoxDirection: "normal",
-              fontSize: "40px",
-              fontWeight: "400",
-              lineHeight: "46px",
-              textAlign: "justify",
-              color: "primary.contrastText",
-              margin: "0 auto",
-              cursor: "default",
-              maxWidth: "530px",
+              ...textStyles,
               m: "50px 0 0 auto",
               [theme.breakpoints.down("lg")]: {
                 fontSize: "3.33vw",
@@ -157,18 +159,7 @@ const OrganizationInfoBlock: React.FC = () => {
         >
           <Typography
             sx={{
-              WebkitTextSizeAdjust: "100%",
-              WebkitFontSmoothing: "antialiased",
-              textRendering: "optimizeLegibility",
-              WebkitBoxDirection: "normal",
-              fontSize: "40px",
-              fontWeight: "400",
-              lineHeight: "46px",
-              textAlign: "justify",
-              color: "primary.contrastText",
-              margin: "0 auto",
-              cursor: "default",
-              maxWidth: "530px",
+              ...textStyles,
               m: "50px 0 0 0px",
               [theme.breakpoints.down("lg")]: {
                 fontSize: "3.33vw",

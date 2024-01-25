@@ -4,32 +4,26 @@ import {
   MouseParallaxChild,
   MouseParallaxContainer,
 } from "react-parallax-mouse";
-import { useAppDispatch } from "../../hooks";
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setIsParallaxEnabled } from "../../store/rootSlice";
-import canadaFlag from "./icons/canada.png";
-import usaFlag from "./icons/united-states-of-america.png";
-import britainFlag from "./icons/united-kingdom.png";
-import germanyFlag from "./icons/germany.png";
-import italyFlag from "./icons/italy.png";
-import polandFlag from "./icons/poland.png";
+import canadaFlag from "../../assets/icons/parallax_logo_icons/canada.png";
+import usaFlag from "../../assets/icons/parallax_logo_icons/united-states-of-america.png";
+import britainFlag from "../../assets/icons/parallax_logo_icons/united-kingdom.png";
+import germanyFlag from "../../assets/icons/parallax_logo_icons/germany.png";
+import italyFlag from "../../assets/icons/parallax_logo_icons/italy.png";
+import polandFlag from "../../assets/icons/parallax_logo_icons/poland.png";
 
 const ParallaxLogo: React.FC = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const componentsTitlesState = useAppSelector(
-    (state) => state.reducer.componentsTitlesState
-  );
-  const isParallaxEnabled = useAppSelector(
-    (state) => state.reducer.isParallaxEnabled
+  const { componentsTitlesState, isParallaxEnabled } = useAppSelector(
+    (state) => state.reducer
   );
   useEffect(() => {
     const handleResize = (): void => {
-      if (window.innerWidth < theme.breakpoints.values.md) {
-        dispatch(setIsParallaxEnabled(false));
-      } else {
-        dispatch(setIsParallaxEnabled(true));
-      }
+      dispatch(
+        setIsParallaxEnabled(window.innerWidth >= theme.breakpoints.values.md)
+      );
     };
 
     handleResize();
@@ -40,6 +34,52 @@ const ParallaxLogo: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [dispatch, theme.breakpoints.values.md]);
+
+  const textStyles = (
+    theme: any,
+    fontSizesArray: number[],
+    marginTopsArray: number[] = [],
+    lineHeightsArray: number[] = []
+  ): object => ({
+    WebkitTextSizeAdjust: "100%",
+    WebkitFontSmoothing: "antialiased",
+    textRendering: "optimizeLegibility",
+    WebkitBoxDirection: "normal",
+    fontWeight: "600",
+    color: "primary.contrastText",
+    cursor: "default",
+    fontSize: `${fontSizesArray[0]}px`,
+    marginTop: `${marginTopsArray[0]}%`,
+    background: `-webkit-linear-gradient(0deg, #ff8177, #8437fd)`,
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: `${fontSizesArray[1]}px`,
+      marginTop: `${marginTopsArray[1]}%`,
+      lineHeight: `${lineHeightsArray[0]}px`,
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: `${fontSizesArray[2]}px`,
+      marginTop: `${marginTopsArray[2]}%`,
+    },
+    [theme.breakpoints.down("xmd")]: {
+      fontSize: `${fontSizesArray[3]}px`,
+      marginTop: `${marginTopsArray[3]}%`,
+      lineHeight: `${lineHeightsArray[1]}px`,
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: `${fontSizesArray[4]}px`,
+      marginTop: `${marginTopsArray[4]}%`,
+    },
+  });
+  const titleStyles = (theme: any): object => ({
+    ...textStyles(theme, [64, 50, 40, 32, 30], [28, 40, 50, 72, 80], [48, 30]),
+  });
+
+  const subtitleStyles = (theme: any): object => ({
+    ...textStyles(theme, [48, 38, 30, 22, 20]),
+    lineHeight: "76px",
+  });
 
   return (
     <MouseParallaxContainer
@@ -64,70 +104,21 @@ const ParallaxLogo: React.FC = () => {
       >
         <Typography
           sx={{
-            WebkitTextSizeAdjust: "100%",
-            WebkitFontSmoothing: "antialiased",
-            textRendering: "optimizeLegibility",
-            WebkitBoxDirection: "normal",
-            fontSize: "64px",
-            fontWeight: "600",
-            color: "primary.contrastText",
-            marginTop: "28%",
-            cursor: "default",
-            background: "-webkit-linear-gradient(0deg, #ff8177, #8437fd)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            [theme.breakpoints.down("lg")]: {
-              fontSize: "50px",
-              marginTop: "40%",
-              lineHeight: "48px",
-            },
-            [theme.breakpoints.down("md")]: {
-              fontSize: "40px",
-              marginTop: "50%",
-            },
-            [theme.breakpoints.down("xmd")]: {
-              fontSize: "32px",
-              marginTop: "72%",
-              lineHeight: "30px",
-            },
-            [theme.breakpoints.down("sm")]: {
-              fontSize: "30px",
-              marginTop: "80%",
-            },
+            ...titleStyles(theme),
           }}
         >
           {componentsTitlesState.homePageTitles.title}
         </Typography>
         <Typography
           sx={{
-            WebkitTextSizeAdjust: "100%",
-            WebkitFontSmoothing: "antialiased",
-            textRendering: "optimizeLegibility",
-            WebkitBoxDirection: "normal",
-            fontSize: "48px",
-            fontWeight: "600",
-            color: "primary.contrastText",
-            lineHeight: "76px",
+            ...subtitleStyles(theme),
             margin: "0 auto",
-            cursor: "default",
-            [theme.breakpoints.down("lg")]: {
-              fontSize: "38px",
-            },
-            [theme.breakpoints.down("md")]: {
-              fontSize: "30px",
-            },
-            [theme.breakpoints.down("xmd")]: {
-              fontSize: "22px",
-            },
-            [theme.breakpoints.down("sm")]: {
-              fontSize: "20px",
-            },
           }}
         >
           {componentsTitlesState.homePageTitles.subtitle}
         </Typography>
       </Box>
-
+      <MouseParallaxChild />
       <MouseParallaxChild
         factorX={0.8}
         factorY={0.8}
@@ -141,7 +132,6 @@ const ParallaxLogo: React.FC = () => {
       >
         <img src={britainFlag} style={{ width: "100px", height: "100px" }} />
       </MouseParallaxChild>
-
       <MouseParallaxChild
         factorX={1.3}
         factorY={1.3}

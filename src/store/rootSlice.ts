@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import imgCarousel1 from "../assets/images/carousel_block_images/img_carousel_1.jpg";
-import img1 from "../assets/images/img_1.jpg";
-import img2 from "../assets/images/img_2.jpg";
-import img3 from "../assets/images/img_3.jpg";
+import img1 from "../assets/images/organization_info_block_images/img_1.jpg";
+import img2 from "../assets/images/organization_info_block_images/img_2.jpg";
+import img3 from "../assets/images/organization_info_block_images/img_3.jpg";
 
 export type ComponentsTitles = {
   homePageTitles: {
