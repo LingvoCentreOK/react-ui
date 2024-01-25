@@ -27,7 +27,7 @@
       "jsx": "react",
       "outDir": "dist",
       "lib": ["esnext", "dom", "dom.iterable"],
-      "noEmit": true
+      "noEmit": true,  
     },
     "exclude": ["node_modules"],
     "include": ["src/**/*.ts", "src/**/*.tsx", "./jest.setup.ts"]
