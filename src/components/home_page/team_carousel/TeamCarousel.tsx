@@ -100,6 +100,9 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
           [theme.breakpoints.down("md")]: {
             fontSize: "4.8vw",
           },
+          [theme.breakpoints.down("sm")]: {
+            fontSize: "9.4vw",
+          },
         }}
       >
         {componentsTitlesState.teamCarouselTitle}

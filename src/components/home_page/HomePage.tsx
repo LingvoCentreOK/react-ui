@@ -8,6 +8,7 @@ import ParallaxLogo from "./ParallaxLogo";
 import OrganizationInfoBlock from "./OrganizationInfoBlock";
 import TeamCarousel from "./team_carousel/TeamCarousel";
 import { useTheme } from "@mui/material";
+import AchievementBlock from "./AchievementBlock";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -74,6 +75,7 @@ const HomePage: React.FC = () => {
       </Box>
       <OrganizationInfoBlock />
       <TeamCarousel />
+      <AchievementBlock />
     </Box>
   );
 };
