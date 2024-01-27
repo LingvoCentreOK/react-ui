@@ -15,6 +15,10 @@ export type ComponentsTitles = {
     secondInfo: string;
   };
   teamCarouselTitle: string;
+  achievementBlockTitles: {
+    title: string;
+    infos: string[];
+  };
 };
 
 export const componentsTitles: ComponentsTitles = {
@@ -30,6 +34,15 @@ export const componentsTitles: ComponentsTitles = {
       "Більше половини із наших клієнтів виїхали і проживають за кордоном зараз",
   },
   teamCarouselTitle: "КОМАНДА",
+  achievementBlockTitles: {
+    title: "НАШІ ДОСЯГНЕННЯ",
+    infos: [
+      "10000+ клієнтів",
+      "10+ років існування компанії",
+      "5 мов",
+      "10+ викладачів",
+    ],
+  },
 };
 
 export type TeamMember = {
