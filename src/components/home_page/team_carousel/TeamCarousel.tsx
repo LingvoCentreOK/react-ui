@@ -1,45 +1,20 @@
 import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useAppSelector } from "../../../hooks";
-import Carousel, { ResponsiveType } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import imgCarousel1 from "../../../assets/images/carousel_block_images/img_carousel_1.jpg";
 import img1 from "../../../assets/images/organization_info_block_images/img_1.jpg";
 import img2 from "../../../assets/images/organization_info_block_images/img_2.jpg";
 import img3 from "../../../assets/images/organization_info_block_images/img_3.jpg";
-import CustomArrow from "./CustomArrow";
-import previousArrowIcon from "../../../assets/icons/team_carousel_icons/previous_arrow_icon.png";
-import nextArrowIcon from "../../../assets/icons/team_carousel_icons/next_arrow_icon.png";
 import TeamMemberItem from "./TeamMemberItem";
-import { TeamCarouselProps, TeamMemberProps } from "../../../types";
+import { TeamMemberProps } from "../../../types";
+import CarouselBlock from "../../../shared/CarouselBlock";
 
-const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
+const TeamCarousel: React.FC = () => {
   const theme = useTheme();
   const componentsTitlesState = useAppSelector(
     (state) => state.reducer.componentsTitlesState
   );
-  const responsive: ResponsiveType = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3001 },
-      items: 3,
-      slidesToSlide: 3,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1025 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 430 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-    mobile: {
-      breakpoint: { max: 429, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
-    },
-  };
 
   const teamMembersData: TeamMemberProps[] = [
     {
@@ -97,6 +72,7 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
           textAlign: "justify",
           color: "primary.contrastText",
           mb: "8vw",
+          cursor: "default",
           [theme.breakpoints.down("md")]: {
             fontSize: "4.8vw",
           },
@@ -107,81 +83,20 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ deviceType }) => {
       >
         {componentsTitlesState.teamCarouselTitle}
       </Typography>
-      <Box
-        sx={{
-          display: "inline-block",
-          width: "86%",
-          maxWidth: "1490px",
-          [theme.breakpoints.down("lg")]: {
-            width: "86%",
-          },
-        }}
-      >
-        <Box
-          sx={{
-            paddingBottom: "30px",
-            position: "relative",
-          }}
-        >
-          <Carousel
-            arrows
-            autoPlaySpeed={3000}
-            centerMode={false}
-            className=""
-            containerClass="container-with-dots"
-            dotListClass=""
-            draggable
-            focusOnSelect={false}
-            infinite
-            itemClass=""
-            keyBoardControl
-            minimumTouchDrag={80}
-            pauseOnHover
-            renderArrowsWhenDisabled={false}
-            renderButtonGroupOutside={false}
-            rewind={false}
-            rewindWithAnimation={false}
-            rtl={false}
-            shouldResetAutoplay
-            sliderClass=""
-            slidesToSlide={1}
-            swipeable
-            responsive={responsive}
-            deviceType={deviceType}
-            autoPlay={deviceType !== "mobile" ? true : false}
-            removeArrowOnDeviceType={["mobile"]}
-            customLeftArrow={
-              <CustomArrow
-                onClick={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                retreatFromLeftSide="0px"
-                retreatFromRightSide={null}
-                arrowIcon={previousArrowIcon}
-              />
-            }
-            customRightArrow={
-              <CustomArrow
-                onClick={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                retreatFromRightSide="0px"
-                retreatFromLeftSide={null}
-                arrowIcon={nextArrowIcon}
-              />
-            }
-          >
-            {teamMembersData.map((member, i) => (
-              <TeamMemberItem
-                key={i}
-                name={member.name}
-                info={member.info}
-                image={member.image}
-              />
-            ))}
-          </Carousel>
-        </Box>
-      </Box>
+      <CarouselBlock responsiveItems={[1, 2, 2, 3]}>
+        {teamMembersData &&
+          teamMembersData.map(
+            (member: TeamMemberProps | null, i): React.JSX.Element | null =>
+              member && member.id ? (
+                <TeamMemberItem
+                  key={i}
+                  name={member.name}
+                  info={member.info}
+                  image={member.image}
+                />
+              ) : null
+          )}
+      </CarouselBlock>
     </Box>
   );
 };

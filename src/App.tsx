@@ -5,8 +5,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import Layout from "./components/layout/Layout";
 import HomePage from "./components/home_page/HomePage";
-import NewsPage from "./components/news_page/NewsPage";
+import NewsPage from "./components/home_page/news_carousel_block/NewsPage";
 import ErrorPage from "./components/error_page/ErrorPage";
+import SingleCardPage from "./components/home_page/news_carousel_block/SingleNewsPage";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
@@ -61,6 +62,10 @@ const App: React.FC = () => {
         {
           path: "/news-page",
           element: <NewsPage />,
+        },
+        {
+          path: "/news-page/:newsId",
+          element: <SingleCardPage />,
         },
       ],
     },
