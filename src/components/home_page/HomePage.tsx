@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useAppDispatch } from "../../hooks";
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
 import ParallaxLogo from "./ParallaxLogo";
 import OrganizationInfoBlock from "./OrganizationInfoBlock";
 import TeamCarousel from "./team_carousel/TeamCarousel";
 import { useTheme } from "@mui/material";
 import AchievementBlock from "./AchievementBlock";
+import NewsCarouselBlock from "./news_carousel_block/NewsCarouselBlock/NewsCarouselBlock";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -76,6 +76,7 @@ const HomePage: React.FC = () => {
       <OrganizationInfoBlock />
       <TeamCarousel />
       <AchievementBlock />
+      <NewsCarouselBlock />
     </Box>
   );
 };

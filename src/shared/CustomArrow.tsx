@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "@mui/material";
 import "react-multi-carousel/lib/styles.css";
-import { CustomArrowProps } from "../../../types";
+import { CustomArrowProps } from "../types";
 
 const CustomArrow: React.FC<CustomArrowProps> = ({
   onClick,

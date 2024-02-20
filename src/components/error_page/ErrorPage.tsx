@@ -7,6 +7,7 @@ import { Box } from "@mui/system";
 
 const ErrorPage: React.FC = () => {
   const error: unknown = useRouteError();
+  console.error(error);
 
   return (
     <Box display="flex" alignItems="center">

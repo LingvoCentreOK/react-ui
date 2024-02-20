@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
+import { Theme } from "@mui/material/styles";
 import {
   MouseParallaxChild,
   MouseParallaxContainer,
@@ -36,7 +37,7 @@ const ParallaxLogo: React.FC = () => {
   }, [dispatch, theme.breakpoints.values.md]);
 
   const textStyles = (
-    theme: any,
+    theme: Theme,
     fontSizesArray: number[],
     marginTopsArray: number[] = [],
     lineHeightsArray: number[] = []
@@ -72,11 +73,11 @@ const ParallaxLogo: React.FC = () => {
       marginTop: `${marginTopsArray[4]}%`,
     },
   });
-  const titleStyles = (theme: any): object => ({
+  const titleStyles = (theme: Theme): object => ({
     ...textStyles(theme, [64, 50, 40, 32, 30], [28, 40, 50, 72, 80], [48, 30]),
   });
 
-  const subtitleStyles = (theme: any): object => ({
+  const subtitleStyles = (theme: Theme): object => ({
     ...textStyles(theme, [48, 38, 30, 22, 20]),
     lineHeight: "76px",
   });

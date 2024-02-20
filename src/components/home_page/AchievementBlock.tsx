@@ -45,6 +45,7 @@ const AchievementBlock: React.FC = () => {
             textAlign: "justify",
             color: "primary.contrastText",
             mb: "8vw",
+            cursor: "default",
             [theme.breakpoints.down("md")]: {
               fontSize: "4.8vw",
             },
@@ -86,6 +87,7 @@ const AchievementBlock: React.FC = () => {
                   fontFamily: "Maven Pro, sans-serif",
                   letterSpacing: "2px",
                   textAlign: "left",
+                  cursor: "default",
                   [theme.breakpoints.down("lg")]: {
                     fontSize: "3vw",
                     letterSpacing: "0.2vw",
