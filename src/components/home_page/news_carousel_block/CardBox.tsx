@@ -10,7 +10,15 @@ const CardBox: React.FC<{
   setTreeDotsStyle: boolean;
   showPointer: boolean;
   treeDotsStyle: object;
-}> = ({ oneNews, styles, setTreeDotsStyle, showPointer, treeDotsStyle }) => {
+  isCardDesign?: boolean;
+}> = ({
+  oneNews,
+  styles,
+  setTreeDotsStyle,
+  showPointer,
+  treeDotsStyle,
+  isCardDesign,
+}) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [counter, setCounter] = useState<number>(0);
@@ -42,7 +50,8 @@ const CardBox: React.FC<{
       }}
     >
       <Card
-        variant="outlined"
+        variant={isCardDesign ? "elevation" : "outlined"}
+        elevation={isCardDesign ? 2 : 0}
         sx={{
           backgroundColor: "#00000000",
           border: "none",
