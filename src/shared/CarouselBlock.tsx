@@ -10,6 +10,7 @@ import { CarouselProps } from "../types";
 const CarouselBlock: React.FC<CarouselProps> = ({
   deviceType,
   responsiveItems,
+  isDraggable,
   children,
 }) => {
   const theme = useTheme();
@@ -59,7 +60,7 @@ const CarouselBlock: React.FC<CarouselProps> = ({
           className=""
           containerClass="container-with-dots"
           dotListClass=""
-          draggable
+          draggable={isDraggable}
           focusOnSelect={false}
           infinite
           itemClass=""

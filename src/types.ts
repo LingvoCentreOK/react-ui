@@ -134,6 +134,7 @@ export type TeamCarouselProps = {
 export type CarouselProps = {
   deviceType?: string | undefined;
   responsiveItems: Array<number>;
+  isDraggable: boolean;
   children: React.ReactNode;
 };
 
