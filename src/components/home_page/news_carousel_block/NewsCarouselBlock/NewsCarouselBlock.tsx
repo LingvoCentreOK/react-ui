@@ -32,6 +32,10 @@ const NewsCarouselBlock: React.FC = () => {
     (state) => state.reducer.cardBoxFontStylesState.newsBlockStyles
   );
 
+  const treeDotsStyleState = useAppSelector(
+    (state) => state.reducer.treeDotsStyleState
+  );
+
   useEffect(() => {
     void dispatch(getRepos(1, perPage));
     dispatch(setCurrentPage(1));
@@ -161,8 +165,8 @@ const NewsCarouselBlock: React.FC = () => {
                       oneNews={oneNews}
                       styles={newsBlockStyles}
                       setTreeDotsStyle={true}
-                      useDoubleClick={true}
                       showPointer={true}
+                      treeDotsStyle={treeDotsStyleState}
                     />
                   );
                 }

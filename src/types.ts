@@ -125,6 +125,13 @@ export type BreakpointStyles = {
   letterSpacing: string;
 };
 
+export type TreeDotsStyleProps = {
+  display: string;
+  whiteSpace: string;
+  overflow: string;
+  textOverflow: string;
+};
+
 ///// Types for other files /////
 
 export type TeamCarouselProps = {

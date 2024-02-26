@@ -5,6 +5,7 @@ import {
   ComponentsTitles,
   OneNewsProps,
   TeamMember,
+  TreeDotsStyleProps,
 } from "../types";
 import imgCarousel1 from "../assets/images/carousel_block_images/img_carousel_1.jpg";
 import img1 from "../assets/images/organization_info_block_images/img_1.jpg";
@@ -144,6 +145,13 @@ const cardBoxFontStyles: CardBoxFontStylesProps = {
   },
 };
 
+const treeDotsStyle: TreeDotsStyleProps = {
+  display: "inline-block",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+};
+
 type InitialState = {
   currentPage: number;
   perPage: number;
@@ -158,6 +166,7 @@ type InitialState = {
   newsStoriesNumbersArray: Array<object>;
   newsData: object;
   cardBoxFontStylesState: CardBoxFontStylesProps;
+  treeDotsStyleState: TreeDotsStyleProps;
 };
 
 const initialState: InitialState = {
@@ -174,6 +183,7 @@ const initialState: InitialState = {
   newsStoriesNumbersArray: [],
   newsData: {},
   cardBoxFontStylesState: cardBoxFontStyles,
+  treeDotsStyleState: treeDotsStyle,
 };
 
 const rootSlice = createSlice({

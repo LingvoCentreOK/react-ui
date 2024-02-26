@@ -8,16 +8,19 @@ const CardBox: React.FC<{
   oneNews: OneNewsProps;
   styles: SeparateNewsStylesProps;
   setTreeDotsStyle: boolean;
-  useDoubleClick: boolean;
   showPointer: boolean;
-}> = ({ oneNews, styles, setTreeDotsStyle, useDoubleClick, showPointer }) => {
+  treeDotsStyle: object;
+}> = ({ oneNews, styles, setTreeDotsStyle, showPointer, treeDotsStyle }) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [counter, setCounter] = useState<number>(0);
   const handleCardClick = (): void => {
-    setCounter(counter + 1);
-    navigate(`/news-page/${oneNews.id}`);
+    if (counter < 1 && showPointer) {
+      setCounter(counter + 1);
+      navigate(`/news-page/${oneNews.id}`);
+    }
   };
+
   useEffect(() => {
     if (window.location.pathname !== "/news-page") {
       setCounter(0);
@@ -25,12 +28,6 @@ const CardBox: React.FC<{
   }, []);
 
   const timeInformation = "Дата публікації новини: ";
-  const treeDotsStyle = {
-    display: "inline-block",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  };
 
   return (
     <Box
@@ -52,12 +49,8 @@ const CardBox: React.FC<{
         }}
       >
         <CardContent
-          onDoubleClick={() => {
-            if (useDoubleClick && counter < 1 && showPointer) handleCardClick();
-          }}
           onClick={() => {
-            if (!useDoubleClick && counter < 1 && showPointer)
-              handleCardClick();
+            handleCardClick();
           }}
           sx={{
             padding: "0px",

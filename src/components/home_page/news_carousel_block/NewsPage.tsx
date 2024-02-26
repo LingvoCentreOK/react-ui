@@ -18,6 +18,10 @@ export const NewsPage: React.FC = () => {
     (state) => state.reducer.cardBoxFontStylesState.newsPageStyles
   );
 
+  const treeDotsStyleState = useAppSelector(
+    (state) => state.reducer.treeDotsStyleState
+  );
+
   useEffect(() => {
     void dispatch(getRepos(currentPage, perPage));
   }, [perPage, currentPage, dispatch]);
@@ -63,8 +67,8 @@ export const NewsPage: React.FC = () => {
                           oneNews={oneNews}
                           styles={newsPageStyles}
                           setTreeDotsStyle={false}
-                          useDoubleClick={false}
                           showPointer={true}
+                          treeDotsStyle={treeDotsStyleState}
                         />
                       );
                     }
