@@ -116,7 +116,7 @@ const cardBoxFontStyles: CardBoxFontStylesProps = {
         letterSpacing: "0.1vw",
       } as BreakpointStyles,
       smBreakpoints: {
-        fontSize: "2.8vw",
+        fontSize: "2.4vw",
         letterSpacing: "0.1vw",
       } as BreakpointStyles,
     },

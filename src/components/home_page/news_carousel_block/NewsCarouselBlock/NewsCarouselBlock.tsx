@@ -167,6 +167,7 @@ const NewsCarouselBlock: React.FC = () => {
                       setTreeDotsStyle={true}
                       showPointer={true}
                       treeDotsStyle={treeDotsStyleState}
+                      onCardClickReaction={false}
                     />
                   );
                 }

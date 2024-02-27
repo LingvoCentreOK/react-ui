@@ -11,6 +11,7 @@ const CardBox: React.FC<{
   showPointer: boolean;
   treeDotsStyle: object;
   isCardDesign?: boolean;
+  onCardClickReaction?: boolean;
 }> = ({
   oneNews,
   styles,
@@ -18,12 +19,13 @@ const CardBox: React.FC<{
   showPointer,
   treeDotsStyle,
   isCardDesign,
+  onCardClickReaction,
 }) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [counter, setCounter] = useState<number>(0);
-  const handleCardClick = (): void => {
-    if (counter < 1 && showPointer) {
+  const handleCardClick = (onCardClickReaction: boolean | undefined): void => {
+    if (counter < 1 && showPointer && onCardClickReaction) {
       setCounter(counter + 1);
       navigate(`/news-page/${oneNews.id}`);
     }
@@ -42,7 +44,7 @@ const CardBox: React.FC<{
       sx={{
         mb: "2px",
         [theme.breakpoints.down("xlg")]: {
-          lineHeight: "22px",
+          lineHeight: "16px",
         },
         [theme.breakpoints.down("sm")]: {
           lineHeight: "10px",
@@ -52,14 +54,18 @@ const CardBox: React.FC<{
       <Card
         variant={isCardDesign ? "elevation" : "outlined"}
         elevation={isCardDesign ? 2 : 0}
+        onClick={() => {
+          handleCardClick(onCardClickReaction);
+        }}
         sx={{
           backgroundColor: "#00000000",
           border: "none",
+          cursor: showPointer && onCardClickReaction ? "pointer" : "default",
         }}
       >
         <CardContent
           onClick={() => {
-            handleCardClick();
+            handleCardClick(!onCardClickReaction);
           }}
           sx={{
             padding: "0px",

@@ -70,6 +70,7 @@ export const NewsPage: React.FC = () => {
                           showPointer={true}
                           treeDotsStyle={treeDotsStyleState}
                           isCardDesign={true}
+                          onCardClickReaction={true}
                         />
                       );
                     }

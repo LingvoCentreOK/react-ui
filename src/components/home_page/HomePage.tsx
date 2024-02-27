@@ -1,21 +1,17 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+//import Button from "@mui/material/Button";
+import { useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
 import ParallaxLogo from "./ParallaxLogo";
 import OrganizationInfoBlock from "./OrganizationInfoBlock";
 import TeamCarousel from "./team_carousel/TeamCarousel";
-import { useTheme } from "@mui/material";
 import AchievementBlock from "./AchievementBlock";
 import NewsCarouselBlock from "./news_carousel_block/NewsCarouselBlock/NewsCarouselBlock";
+import ContactUsButton from "./ContactUsButton";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const componentsTitlesState = useAppSelector(
-    (state) => state.reducer.componentsTitlesState
-  );
-  const theme = useTheme();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -41,37 +37,7 @@ const HomePage: React.FC = () => {
         }}
       >
         <ParallaxLogo />
-        <Button
-          variant="outlined"
-          size="large"
-          href="news-page"
-          sx={{
-            position: "absolute",
-            top: "60%",
-            color: "primary.contrastText",
-            fontSize: "28px",
-            height: "80px",
-            width: "440px",
-            fontWeight: "600",
-            borderWidth: "1px",
-            borderColor: "primary.contrastText",
-            borderRadius: "100px",
-            textTransform: "none",
-            "&:hover": {
-              border: 0,
-              background: "linear-gradient(90deg, #ff8177, #8437fd)",
-              color: "primary.contrastText",
-            },
-            [theme.breakpoints.down("md")]: {
-              width: "380px",
-            },
-            [theme.breakpoints.down("xmd")]: {
-              width: "340px",
-            },
-          }}
-        >
-          {componentsTitlesState.homePageTitles.buttonTitle}
-        </Button>
+        <ContactUsButton />
       </Box>
       <OrganizationInfoBlock />
       <TeamCarousel />
