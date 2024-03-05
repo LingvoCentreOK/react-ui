@@ -106,6 +106,10 @@ const ParallaxLogo: React.FC = () => {
         <Typography
           sx={{
             ...titleStyles(theme),
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "7vw",
+              mt: "265px",
+            },
           }}
         >
           {componentsTitlesState.homePageTitles.title}
@@ -114,6 +118,9 @@ const ParallaxLogo: React.FC = () => {
           sx={{
             ...subtitleStyles(theme),
             margin: "0 auto",
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "5vw",
+            },
           }}
         >
           {componentsTitlesState.homePageTitles.subtitle}
