@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, /* useEffect, */ useRef } from "react";
 import { Box, Grid, Typography, useTheme, Link } from "@mui/material";
 import { ContactInfo, ContactInformationProps } from "../../../types";
 import phoneIcon from "../../../assets/icons/contact_block_icons/phone-icon.png";
@@ -9,6 +9,7 @@ import adressIcon from "../../../assets/icons/contact_block_icons/adress-icon.pn
 
 const ContactsInformationComponent: React.FC = () => {
   const theme = useTheme();
+  const targetRef = useRef(null);
 
   const contactInfoContextString: [string][] = [
     ["м. Черкаси,"],
@@ -92,6 +93,8 @@ const ContactsInformationComponent: React.FC = () => {
             }}
           >
             <Typography
+              ref={targetRef}
+              id="elementId"
               color="primary.contrastText"
               sx={{
                 WebkitTextSizeAdjust: "100%",

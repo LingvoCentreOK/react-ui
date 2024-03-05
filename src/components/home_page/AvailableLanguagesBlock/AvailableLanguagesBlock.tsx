@@ -2,7 +2,7 @@ import React from "react";
 import { Box, useTheme } from "@mui/material";
 import LanguagesComponent from "./LanguagesInformationComponent/LanguagesInformationComponent";
 import ServicesComponent from "./ServicesInformationComponent";
-import ContactInformationComponent from "./ContacstInformationComponent";
+import ContactInformationComponent from "./ContactsInformationComponent";
 import MapsContainer from "./LanguagesInformationComponent/MapsContainer/MapsContainer";
 
 const AvailableLanguagesBlock: React.FC = () => {
