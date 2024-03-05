@@ -1,7 +1,11 @@
 import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 
-const CircleComponent: React.FC<any> = (languagesAndColors: any) => {
+interface CircleProps {
+  languagesAndColors: string[];
+}
+
+const CircleComponent: React.FC<CircleProps> = ({ languagesAndColors }) => {
   const theme = useTheme();
 
   return (
@@ -11,33 +15,33 @@ const CircleComponent: React.FC<any> = (languagesAndColors: any) => {
         justifyContent: "space-around",
         alignItems: "center",
         color: "primary.contrastText",
-        background: languagesAndColors.languagesAndColors[1],
+        background: languagesAndColors[1],
         borderRadius: "180%",
-        width: languagesAndColors.languagesAndColors[2],
-        height: languagesAndColors.languagesAndColors[2],
+        width: languagesAndColors[2],
+        height: languagesAndColors[2],
         boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.5)",
         position: "absolute",
-        left: languagesAndColors.languagesAndColors[3],
+        left: languagesAndColors[3],
         transform: "translateX(-50%)",
-        top: languagesAndColors.languagesAndColors[4],
+        top: languagesAndColors[4],
         [theme.breakpoints.down("xl")]: {
-          width: languagesAndColors.languagesAndColors[5],
-          height: languagesAndColors.languagesAndColors[5],
+          width: languagesAndColors[5],
+          height: languagesAndColors[5],
         },
         [theme.breakpoints.down("lg")]: {
-          width: `calc(${languagesAndColors.languagesAndColors[5]} * 1.2)`,
-          height: `calc(${languagesAndColors.languagesAndColors[5]} * 1.2)`,
+          width: `calc(${languagesAndColors[5]} * 1.2)`,
+          height: `calc(${languagesAndColors[5]} * 1.2)`,
         },
         [theme.breakpoints.down("md")]: {
-          top: `calc(${languagesAndColors.languagesAndColors[4]} * 0.7)`,
+          top: `calc(${languagesAndColors[4]} * 0.7)`,
         },
         [theme.breakpoints.down("xmd")]: {
-          top: `calc(${languagesAndColors.languagesAndColors[4]} * 0.5)`,
+          top: `calc(${languagesAndColors[4]} * 0.5)`,
         },
         [theme.breakpoints.down("sm")]: {
-          width: `calc(${languagesAndColors.languagesAndColors[5]} * 1.7)`,
-          height: `calc(${languagesAndColors.languagesAndColors[5]} * 1.7)`,
-          top: `calc(${languagesAndColors.languagesAndColors[4]} * 0.65)`,
+          width: `calc(${languagesAndColors[5]} * 1.7)`,
+          height: `calc(${languagesAndColors[5]} * 1.7)`,
+          top: `calc(${languagesAndColors[4]} * 0.65)`,
         },
       }}
     >
@@ -70,7 +74,7 @@ const CircleComponent: React.FC<any> = (languagesAndColors: any) => {
           },
         }}
       >
-        {languagesAndColors.languagesAndColors[0]}
+        {languagesAndColors[0]}
       </Typography>
     </Box>
   );
