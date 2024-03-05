@@ -1,6 +1,7 @@
-import React, { Fragment, /* useEffect, */ useRef } from "react";
+import React, { Fragment } from "react";
 import { Box, Grid, Typography, useTheme, Link } from "@mui/material";
 import { ContactInfo, ContactInformationProps } from "../../../types";
+import { Link as OffSetLink } from "react-scroll";
 import phoneIcon from "../../../assets/icons/contact_block_icons/phone-icon.png";
 import facebookIcon from "../../../assets/icons/contact_block_icons/facebook-icon.png";
 import instagramIcon from "../../../assets/icons/contact_block_icons/instagram-icon.png";
@@ -9,7 +10,6 @@ import adressIcon from "../../../assets/icons/contact_block_icons/adress-icon.pn
 
 const ContactsInformationComponent: React.FC = () => {
   const theme = useTheme();
-  const targetRef = useRef(null);
 
   const contactInfoContextString: [string][] = [
     ["м. Черкаси,"],
@@ -49,7 +49,7 @@ const ContactsInformationComponent: React.FC = () => {
             </Fragment>
           )
         ),
-        linkToImplementContact: null,
+        linkToImplementContact: "makerElementId",
       },
     ],
   };
@@ -93,7 +93,6 @@ const ContactsInformationComponent: React.FC = () => {
             }}
           >
             <Typography
-              ref={targetRef}
               id="elementId"
               color="primary.contrastText"
               sx={{
@@ -150,7 +149,7 @@ const ContactsInformationComponent: React.FC = () => {
               {contactInformation.infos &&
                 contactInformation.infos.map(
                   (
-                    contact: ContactInfo | null,
+                    contact: ContactInfo,
                     index: number
                   ): React.JSX.Element | null => {
                     if (contact) {
@@ -186,58 +185,110 @@ const ContactsInformationComponent: React.FC = () => {
                             },
                           }}
                         >
-                          <Link
-                            href={contact.linkToImplementContact ?? undefined}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            component="a"
-                            underline="none"
-                            sx={{
-                              display: "flex",
-                              cursor: "pointer",
-                            }}
-                          >
-                            <Box
-                              component="img"
-                              src={contact.contactIcon}
-                              title={`${contact.contactIcon}`}
-                              alt={`${contact.contactIcon}`}
+                          {index === 4 ? (
+                            <OffSetLink
+                              to={`${contact.linkToImplementContact}`}
+                              smooth={true}
+                              duration={1000}
+                              offset={400}
+                            >
+                              <Box sx={{ display: "flex", cursor: "pointer" }}>
+                                <Box
+                                  component="img"
+                                  src={contact.contactIcon}
+                                  title={`${contact.contactIcon}`}
+                                  alt={`${contact.contactIcon}`}
+                                  sx={{
+                                    width: "77px",
+                                    height: "77px",
+                                    m: "auto 36px auto 0",
+                                    [theme.breakpoints.down("xl")]: {
+                                      width: "5vw",
+                                      height: "5vw",
+                                      m: "auto 2vw auto 0",
+                                    },
+                                  }}
+                                />
+                                <Typography
+                                  gutterBottom
+                                  variant="h4"
+                                  color="primary.contrastText"
+                                  sx={{
+                                    fontFamily: "Maven Pro, sans-serif",
+                                    fontWeight: 500,
+                                    my: "auto",
+                                    [theme.breakpoints.down("lg")]: {
+                                      fontSize: "3vw",
+                                    },
+                                    [theme.breakpoints.down("mlg")]: {
+                                      fontSize: "2.9vw",
+                                    },
+                                    [theme.breakpoints.down("xlg")]: {
+                                      fontSize: "2.8vw",
+                                    },
+                                    [theme.breakpoints.down("sm")]: {
+                                      fontSize: "5vw",
+                                    },
+                                  }}
+                                >
+                                  {contact.сontactInfoContext}
+                                </Typography>
+                              </Box>
+                            </OffSetLink>
+                          ) : (
+                            <Link
+                              href={contact.linkToImplementContact}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              component="a"
+                              underline="none"
                               sx={{
-                                width: "77px",
-                                height: "77px",
-                                m: "auto 36px auto 0",
-                                [theme.breakpoints.down("xl")]: {
-                                  width: "5vw",
-                                  height: "5vw",
-                                  m: "auto 2vw auto 0",
-                                },
-                              }}
-                            />
-                            <Typography
-                              gutterBottom
-                              variant="h4"
-                              color="primary.contrastText"
-                              sx={{
-                                fontFamily: "Maven Pro, sans-serif",
-                                fontWeight: 500,
-                                my: "auto",
-                                [theme.breakpoints.down("lg")]: {
-                                  fontSize: "3vw",
-                                },
-                                [theme.breakpoints.down("mlg")]: {
-                                  fontSize: "2.9vw",
-                                },
-                                [theme.breakpoints.down("xlg")]: {
-                                  fontSize: "2.8vw",
-                                },
-                                [theme.breakpoints.down("sm")]: {
-                                  fontSize: "5vw",
-                                },
+                                display: "flex",
+                                cursor: "pointer",
                               }}
                             >
-                              {contact.сontactInfoContext}
-                            </Typography>
-                          </Link>
+                              <Box
+                                component="img"
+                                src={contact.contactIcon}
+                                title={`${contact.contactIcon}`}
+                                alt={`${contact.contactIcon}`}
+                                sx={{
+                                  width: "77px",
+                                  height: "77px",
+                                  m: "auto 36px auto 0",
+                                  [theme.breakpoints.down("xl")]: {
+                                    width: "5vw",
+                                    height: "5vw",
+                                    m: "auto 2vw auto 0",
+                                  },
+                                }}
+                              />
+                              <Typography
+                                gutterBottom
+                                variant="h4"
+                                color="primary.contrastText"
+                                sx={{
+                                  fontFamily: "Maven Pro, sans-serif",
+                                  fontWeight: 500,
+                                  my: "auto",
+                                  [theme.breakpoints.down("lg")]: {
+                                    fontSize: "3vw",
+                                  },
+                                  [theme.breakpoints.down("mlg")]: {
+                                    fontSize: "2.9vw",
+                                  },
+                                  [theme.breakpoints.down("xlg")]: {
+                                    fontSize: "2.8vw",
+                                  },
+                                  [theme.breakpoints.down("sm")]: {
+                                    fontSize: "5vw",
+                                  },
+                                }}
+                              >
+                                {contact.сontactInfoContext}
+                              </Typography>
+                            </Link>
+                          )}
                         </Grid>
                       );
                     }

@@ -185,7 +185,7 @@ export type InnerSquareContentProps = {
 export type ContactInfo = {
   contactIcon: string;
   сontactInfoContext: React.ReactNode;
-  linkToImplementContact: string | null;
+  linkToImplementContact: string;
 };
 
 export type ContactInformationProps = {

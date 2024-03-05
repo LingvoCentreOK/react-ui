@@ -42,7 +42,6 @@ const AvailableLanguagesBlock: React.FC = () => {
             },
           }}
         >
-          {/* <div id="map"></div> */}
           <MapsContainer />
         </Box>
       </Box>

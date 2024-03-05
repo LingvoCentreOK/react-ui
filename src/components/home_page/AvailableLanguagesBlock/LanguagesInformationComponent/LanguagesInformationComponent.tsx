@@ -73,7 +73,10 @@ const LanguagesInformationComponent: React.FC = () => {
             height: "80vw",
           },
           [theme.breakpoints.down("md")]: {
-            height: "70vw",
+            height: "74vw",
+          },
+          [theme.breakpoints.down("xmd")]: {
+            height: "78vw",
           },
           [theme.breakpoints.down("sm")]: {
             height: "130vw",

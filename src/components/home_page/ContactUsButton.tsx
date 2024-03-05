@@ -16,7 +16,7 @@ const ContactUsButton: React.FC = () => {
       to="elementId"
       smooth={true}
       duration={2000}
-      offset={-70}
+      offset={-50}
       style={{
         position: "absolute",
         top: "60%",

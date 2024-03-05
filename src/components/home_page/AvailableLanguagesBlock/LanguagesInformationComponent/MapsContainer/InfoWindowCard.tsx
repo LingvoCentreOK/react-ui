@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { InfoWindow } from "@vis.gl/react-google-maps";
 import { Stack, Typography } from "@mui/material";

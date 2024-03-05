@@ -59,7 +59,7 @@ const CircleComponent: React.FC<any> = (languagesAndColors: any) => {
             fontSize: "2.9vw",
             letterSpacing: "0.2vw",
           },
-          [theme.breakpoints.down("xlg")]: {
+          [theme.breakpoints.down("md")]: {
             fontSize: "2.8vw",
             letterSpacing: "0.2vw",
           },

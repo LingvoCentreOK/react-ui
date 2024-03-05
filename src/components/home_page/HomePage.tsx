@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
-//import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
 import ParallaxLogo from "./ParallaxLogo";

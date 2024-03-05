@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import {
   APIProvider,
@@ -24,13 +22,15 @@ const MapsContainer: React.FC = () => {
           mapId={"bf4a24ebafc74740"}
           onClick={handleMapClick}
         >
-          <AdvancedMarker position={position} onClick={() => setOpen(true)}>
-            <Pin
-              background={"grey"}
-              borderColor={"green"}
-              glyphColor={"purple"}
-            />
-          </AdvancedMarker>
+          <div id="makerElementId">
+            <AdvancedMarker position={position} onClick={() => setOpen(true)}>
+              <Pin
+                background={"grey"}
+                borderColor={"green"}
+                glyphColor={"purple"}
+              />
+            </AdvancedMarker>
+          </div>
 
           {open && <InfoWindowCard setOpenWindow={setOpen} />}
         </Map>
