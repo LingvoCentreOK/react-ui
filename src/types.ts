@@ -169,3 +169,26 @@ export type OneNewsProps = {
   type?: string;
   url?: string;
 };
+
+export type languagesAndColors = string[];
+
+export type AvailableLanguagesBlockTitlesProps = {
+  title: string;
+  languagesAndStylesArray: languagesAndColors[];
+};
+
+export type InnerSquareContentProps = {
+  title: string;
+  priceServicesInfos: string[];
+};
+
+export type ContactInfo = {
+  contactIcon: string;
+  сontactInfoContext: React.ReactNode;
+  linkToImplementContact: string | null;
+};
+
+export type ContactInformationProps = {
+  title: string;
+  infos: ContactInfo[];
+};

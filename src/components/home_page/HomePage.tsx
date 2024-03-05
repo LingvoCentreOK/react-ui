@@ -9,6 +9,7 @@ import TeamCarousel from "./team_carousel/TeamCarousel";
 import AchievementBlock from "./AchievementBlock";
 import NewsCarouselBlock from "./news_carousel_block/NewsCarouselBlock/NewsCarouselBlock";
 import ContactUsButton from "./ContactUsButton";
+import AvailableLanguagesBlock from "./AvailableLanguagesBlock/AvailableLanguagesBlock";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -43,6 +44,7 @@ const HomePage: React.FC = () => {
       <TeamCarousel />
       <AchievementBlock />
       <NewsCarouselBlock />
+      <AvailableLanguagesBlock />
     </Box>
   );
 };
