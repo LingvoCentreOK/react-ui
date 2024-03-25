@@ -78,7 +78,7 @@ const ParallaxLogoComponent: React.FC = () => {
   });
 
   const subtitleStyles = (theme: Theme): object => ({
-    ...textStyles(theme, [48, 38, 30, 22, 20], [26, -2, -1, 0, 0]),
+    ...textStyles(theme, [48, 38, 30, 22, 20], [26]),
     lineHeight: "76px",
   });
 
