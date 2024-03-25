@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { InnerSquareContentProps } from "../../../types";
+import { servicesContentProps } from "../../../types";
 
-const ServicesInformationComponent: React.FC = () => {
+const ServicesComponent: React.FC = () => {
   const theme = useTheme();
-  const innerSquareContent: InnerSquareContentProps = {
+  const servicesContent: servicesContentProps = {
     title: "ПОСЛУГИ",
-    priceServicesInfos: [
+    priceInfos: [
       "ПЕРСОНАЛЬНІ ЗАНЯТТЯ - 200 грн/год*",
       "ГРУПОВІ ЗАНЯТТЯ - 150 грн/год*",
       "ОНЛАЙН ЗАНЯТТЯ - 200 грн/год*",
@@ -55,7 +55,7 @@ const ServicesInformationComponent: React.FC = () => {
             },
           }}
         >
-          {innerSquareContent.title}
+          {servicesContent.title}
         </Typography>
         <Box
           sx={{
@@ -73,7 +73,7 @@ const ServicesInformationComponent: React.FC = () => {
               overflow: "hidden",
             }}
           >
-            {innerSquareContent.priceServicesInfos.map(
+            {servicesContent.priceInfos.map(
               (priceServicesInfo: string, index: number): React.JSX.Element => (
                 <Grid key={index} item xs={12} sm={6}>
                   <Typography
@@ -104,4 +104,4 @@ const ServicesInformationComponent: React.FC = () => {
   );
 };
 
-export default ServicesInformationComponent;
+export default ServicesComponent;

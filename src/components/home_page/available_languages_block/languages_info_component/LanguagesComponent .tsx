@@ -3,7 +3,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { AvailableLanguagesBlockTitlesProps } from "../../../../types";
 import CircleComponent from "./CircleComponent";
 
-const LanguagesInformationComponent: React.FC = () => {
+const LanguagesComponent: React.FC = () => {
   const theme = useTheme();
   const availableLanguagesBlockTitles: AvailableLanguagesBlockTitlesProps = {
     title: "ДОСТУПНІ МОВИ",
@@ -96,4 +96,4 @@ const LanguagesInformationComponent: React.FC = () => {
   );
 };
 
-export default LanguagesInformationComponent;
+export default LanguagesComponent;

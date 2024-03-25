@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, useTheme } from "@mui/material";
-import LanguagesComponent from "./LanguagesInformationComponent/LanguagesInformationComponent";
-import ServicesComponent from "./ServicesInformationComponent";
-import ContactInformationComponent from "./ContactsInformationComponent";
-import MapsContainer from "./LanguagesInformationComponent/MapsContainer/MapsContainer";
+import RenderLanguagesComponent from "./languages_info_component/LanguagesComponent ";
+import RenderServicesComponent from "./ServicesComponent";
+import RenderContactInfoComponent from "./ContactInfoComponent";
+import RenderMapsContainer from "./languages_info_component/maps_container/MapsContainer";
 
 const AvailableLanguagesBlock: React.FC = () => {
   const theme = useTheme();
@@ -22,14 +22,14 @@ const AvailableLanguagesBlock: React.FC = () => {
         },
       }}
     >
-      <LanguagesComponent />
-      <ServicesComponent />
+      <RenderLanguagesComponent />
+      <RenderServicesComponent />
       <Box
         sx={{
           position: "relative",
         }}
       >
-        <ContactInformationComponent />
+        <RenderContactInfoComponent />
         <Box
           sx={{
             position: "absolute",
@@ -42,7 +42,7 @@ const AvailableLanguagesBlock: React.FC = () => {
             },
           }}
         >
-          <MapsContainer />
+          <RenderMapsContainer />
         </Box>
       </Box>
     </Box>

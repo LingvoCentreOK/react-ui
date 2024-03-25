@@ -2,22 +2,22 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
-import ParallaxLogo from "./ParallaxLogo";
-import OrganizationInfoBlock from "./OrganizationInfoBlock";
+import ParallaxLogoComponent from "./ParallaxLogoComponent";
+import OrganizationInfoBlock from "./OrganizationInfoBlockComponent ";
 import TeamCarousel from "./team_carousel/TeamCarousel";
 import AchievementBlock from "./AchievementBlock";
-import NewsCarouselBlock from "./news_carousel_block/NewsCarouselBlock/NewsCarouselBlock";
+import NewsCarouselBlock from "./news_carousel_block/news_carousel_block/NewsCarouselBlock";
 import ContactUsButton from "./ContactUsButton";
-import AvailableLanguagesBlock from "./AvailableLanguagesBlock/AvailableLanguagesBlock";
+import AvailableLanguagesBlock from "./available_languages_block/AvailableLanguagesBlock";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    const textVisibleTimeout = setTimeout(() => {
       dispatch(setIsTextVisible(true));
     }, 50);
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(textVisibleTimeout);
   }, [dispatch]);
 
   return (
@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
           overflow: "hidden",
         }}
       >
-        <ParallaxLogo />
+        <ParallaxLogoComponent />
         <ContactUsButton />
       </Box>
       <OrganizationInfoBlock />

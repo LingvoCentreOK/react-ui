@@ -177,18 +177,18 @@ export type AvailableLanguagesBlockTitlesProps = {
   languagesAndStylesArray: languagesAndColors[];
 };
 
-export type InnerSquareContentProps = {
+export type servicesContentProps = {
   title: string;
-  priceServicesInfos: string[];
+  priceInfos: string[];
 };
 
 export type ContactInfo = {
   contactIcon: string;
-  сontactInfoContext: React.ReactNode;
-  linkToImplementContact: string;
+  contactContext: React.ReactNode;
+  contactLink: string;
 };
 
-export type ContactInformationProps = {
+export type ContactInfoProps = {
   title: string;
   infos: ContactInfo[];
 };

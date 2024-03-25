@@ -1,7 +1,7 @@
 import React from "react";
 import { InfoWindow } from "@vis.gl/react-google-maps";
 import { Stack, Typography } from "@mui/material";
-const InfoWindowCard: React.FC<{
+const InfoWindowComponent: React.FC<{
   setOpenWindow: (value: boolean) => void;
 }> = ({ setOpenWindow }) => {
   const position = { lat: 49.4464472, lng: 32.0616021 };
@@ -24,4 +24,4 @@ const InfoWindowCard: React.FC<{
   );
 };
 
-export default InfoWindowCard;
+export default InfoWindowComponent;

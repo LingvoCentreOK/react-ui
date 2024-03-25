@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Box, Grid, Typography, useTheme, Link } from "@mui/material";
-import { ContactInfo, ContactInformationProps } from "../../../types";
+import { ContactInfo, ContactInfoProps } from "../../../types";
 import { Link as OffSetLink } from "react-scroll";
 import phoneIcon from "../../../assets/icons/contact_block_icons/phone-icon.png";
 import facebookIcon from "../../../assets/icons/contact_block_icons/facebook-icon.png";
@@ -8,48 +8,46 @@ import instagramIcon from "../../../assets/icons/contact_block_icons/instagram-i
 import gmailIcon from "../../../assets/icons/contact_block_icons/gmail-icon.png";
 import adressIcon from "../../../assets/icons/contact_block_icons/adress-icon.png";
 
-const ContactsInformationComponent: React.FC = () => {
+const ContactInfoComponent: React.FC = () => {
   const theme = useTheme();
 
-  const contactInfoContextString: [string][] = [
+  const addressInfo: [string][] = [
     ["м. Черкаси,"],
     ["вул. Байди-Вишнивецького 37,"],
     [" 5й поверх"],
   ];
-  const contactInformation: ContactInformationProps = {
+  const contactInfo: ContactInfoProps = {
     title: "ЯК З НАМИ ЗВ’ЯЗАТИСЬ",
     infos: [
       {
         contactIcon: phoneIcon ? phoneIcon : "phone icon",
-        сontactInfoContext: "+380123456789",
-        linkToImplementContact: "tel:+380123456789",
+        contactContext: "+380123456789",
+        contactLink: "tel:+380123456789",
       },
       {
         contactIcon: facebookIcon ? facebookIcon : "facebook icon",
-        сontactInfoContext: "facebook.com",
-        linkToImplementContact: "https://www.facebook.com",
+        contactContext: "facebook.com",
+        contactLink: "https://www.facebook.com",
       },
       {
         contactIcon: instagramIcon ? instagramIcon : "instagram icon",
-        сontactInfoContext: "instagram.com",
-        linkToImplementContact: "https://www.instagram.com",
+        contactContext: "instagram.com",
+        contactLink: "https://www.instagram.com",
       },
       {
         contactIcon: gmailIcon ? gmailIcon : "gmail icon",
-        сontactInfoContext: "gmail@gmail.com",
-        linkToImplementContact: "mailto:gmail@gmail.com",
+        contactContext: "gmail@gmail.com",
+        contactLink: "mailto:gmail@gmail.com",
       },
       {
         contactIcon: adressIcon ? adressIcon : "adress icon",
-        сontactInfoContext: contactInfoContextString.map(
-          (infoContext, index) => (
-            <Fragment key={index}>
-              {infoContext}
-              <br />
-            </Fragment>
-          )
-        ),
-        linkToImplementContact: "makerElementId",
+        contactContext: addressInfo.map((infoContext, index) => (
+          <Fragment key={index}>
+            {infoContext}
+            <br />
+          </Fragment>
+        )),
+        contactLink: "makerElementId",
       },
     ],
   };
@@ -121,7 +119,7 @@ const ContactsInformationComponent: React.FC = () => {
                 },
               }}
             >
-              {contactInformation.title}
+              {contactInfo.title}
             </Typography>
           </Box>
 
@@ -146,8 +144,8 @@ const ContactsInformationComponent: React.FC = () => {
                 },
               }}
             >
-              {contactInformation.infos &&
-                contactInformation.infos.map(
+              {contactInfo.infos &&
+                contactInfo.infos.map(
                   (
                     contact: ContactInfo,
                     index: number
@@ -187,7 +185,7 @@ const ContactsInformationComponent: React.FC = () => {
                         >
                           {index === 4 ? (
                             <OffSetLink
-                              to={`${contact.linkToImplementContact}`}
+                              to={`${contact.contactLink}`}
                               smooth={true}
                               duration={1000}
                               offset={400}
@@ -231,13 +229,13 @@ const ContactsInformationComponent: React.FC = () => {
                                     },
                                   }}
                                 >
-                                  {contact.сontactInfoContext}
+                                  {contact.contactContext}
                                 </Typography>
                               </Box>
                             </OffSetLink>
                           ) : (
                             <Link
-                              href={contact.linkToImplementContact}
+                              href={contact.contactLink}
                               target="_blank"
                               rel="noopener noreferrer"
                               component="a"
@@ -285,7 +283,7 @@ const ContactsInformationComponent: React.FC = () => {
                                   },
                                 }}
                               >
-                                {contact.сontactInfoContext}
+                                {contact.contactContext}
                               </Typography>
                             </Link>
                           )}
@@ -303,4 +301,4 @@ const ContactsInformationComponent: React.FC = () => {
   );
 };
 
-export default ContactsInformationComponent;
+export default ContactInfoComponent;

@@ -5,7 +5,7 @@ import { useAppSelector } from "../../hooks";
 import { useTheme } from "@mui/material";
 
 const ContactUsButton: React.FC = () => {
-  const componentsTitlesState = useAppSelector(
+  const titlesState = useAppSelector(
     (state) => state.reducer.componentsTitlesState
   );
 
@@ -19,7 +19,7 @@ const ContactUsButton: React.FC = () => {
       offset={-50}
       style={{
         position: "absolute",
-        top: "60%",
+        top: "61%",
       }}
     >
       <Button
@@ -52,7 +52,7 @@ const ContactUsButton: React.FC = () => {
           },
         }}
       >
-        {componentsTitlesState.homePageTitles.buttonTitle}
+        {titlesState.homePageTitles.buttonTitle}
       </Button>
     </Link>
   );

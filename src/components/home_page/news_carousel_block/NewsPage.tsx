@@ -3,7 +3,7 @@ import { Box, Stack, useTheme, CircularProgress } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { getRepos } from "../../../actions/reposSliceActions";
 import CardBox from "./CardBox";
-import PaginationButtons from "./NewsCarouselBlock/PaginationButtons";
+import PaginationButtons from "./news_carousel_block/PaginationButtons";
 import { OneNewsProps } from "../../../types";
 import GoHomeButton from "./GoHomeButton";
 
