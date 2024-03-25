@@ -83,7 +83,7 @@ const TeamCarousel: React.FC = () => {
       >
         {componentsTitlesState.teamCarouselTitle}
       </Typography>
-      <CarouselBlock responsiveItems={[1, 2, 2, 3]}>
+      <CarouselBlock responsiveItems={[1, 2, 2, 3]} isDraggable={true}>
         {teamMembersData &&
           teamMembersData.map(
             (member: TeamMemberProps | null, i): React.JSX.Element | null =>

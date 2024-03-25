@@ -8,10 +8,10 @@ import img2 from "../../assets/images/organization_info_block_images/img_2.jpg";
 import img3 from "../../assets/images/organization_info_block_images/img_3.jpg";
 import img4 from "../../assets/images/organization_info_block_images/img_4.jpg";
 
-const OrganizationInfoBlock: React.FC = () => {
+const OrganizationInfoBlockComponent: React.FC = () => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const images = useAppSelector((state) => state.reducer.images);
+  const organizationImages = useAppSelector((state) => state.reducer.images);
   const componentsTitlesState = useAppSelector(
     (state) => state.reducer.componentsTitlesState
   );
@@ -102,7 +102,7 @@ const OrganizationInfoBlock: React.FC = () => {
         >
           <CardMedia
             component="img"
-            src={images[0]}
+            src={organizationImages[0]}
             alt="img"
             sx={{
               maxWidth: "530px",
@@ -189,7 +189,7 @@ const OrganizationInfoBlock: React.FC = () => {
         >
           <CardMedia
             component="img"
-            src={images[1]}
+            src={organizationImages[1]}
             alt="img"
             sx={{
               maxWidth: "530px",
@@ -210,4 +210,4 @@ const OrganizationInfoBlock: React.FC = () => {
   );
 };
 
-export default OrganizationInfoBlock;
+export default OrganizationInfoBlockComponent;

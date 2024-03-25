@@ -3,7 +3,7 @@ import { Box, Stack, useTheme, CircularProgress } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { getRepos } from "../../../actions/reposSliceActions";
 import CardBox from "./CardBox";
-import PaginationButtons from "./NewsCarouselBlock/PaginationButtons";
+import PaginationButtons from "./news_carousel_block/PaginationButtons";
 import { OneNewsProps } from "../../../types";
 import GoHomeButton from "./GoHomeButton";
 
@@ -16,6 +16,10 @@ export const NewsPage: React.FC = () => {
 
   const newsPageStyles = useAppSelector(
     (state) => state.reducer.cardBoxFontStylesState.newsPageStyles
+  );
+
+  const treeDotsStyleState = useAppSelector(
+    (state) => state.reducer.treeDotsStyleState
   );
 
   useEffect(() => {
@@ -63,8 +67,10 @@ export const NewsPage: React.FC = () => {
                           oneNews={oneNews}
                           styles={newsPageStyles}
                           setTreeDotsStyle={false}
-                          useDoubleClick={false}
                           showPointer={true}
+                          treeDotsStyle={treeDotsStyleState}
+                          isCardDesign={true}
+                          onCardClickReaction={true}
                         />
                       );
                     }

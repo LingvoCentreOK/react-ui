@@ -14,6 +14,9 @@ const SingleNewsPage: React.FC = () => {
   const singleCardPageStyles = useAppSelector(
     (state) => state.reducer.cardBoxFontStylesState.singleCardPageStyles
   );
+  const treeDotsStyleState = useAppSelector(
+    (state) => state.reducer.treeDotsStyleState
+  );
 
   const [newsData, setNewsData] = useState<OneNewsProps | null>(null);
   useEffect(() => {
@@ -65,8 +68,8 @@ const SingleNewsPage: React.FC = () => {
               oneNews={newsData}
               styles={singleCardPageStyles}
               setTreeDotsStyle={false}
-              useDoubleClick={false}
               showPointer={false}
+              treeDotsStyle={treeDotsStyleState}
             />
           )}
         </Box>

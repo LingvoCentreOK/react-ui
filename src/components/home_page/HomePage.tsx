@@ -1,27 +1,23 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch } from "../../hooks";
 import { setIsTextVisible } from "../../store/rootSlice";
-import ParallaxLogo from "./ParallaxLogo";
-import OrganizationInfoBlock from "./OrganizationInfoBlock";
+import ParallaxLogoComponent from "./ParallaxLogoComponent";
+import OrganizationInfoBlock from "./OrganizationInfoBlockComponent ";
 import TeamCarousel from "./team_carousel/TeamCarousel";
-import { useTheme } from "@mui/material";
 import AchievementBlock from "./AchievementBlock";
-import NewsCarouselBlock from "./news_carousel_block/NewsCarouselBlock/NewsCarouselBlock";
+import NewsCarouselBlock from "./news_carousel_block/news_carousel_block/NewsCarouselBlock";
+import ContactUsButton from "./ContactUsButton";
+import AvailableLanguagesBlock from "./available_languages_block/AvailableLanguagesBlock";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const componentsTitlesState = useAppSelector(
-    (state) => state.reducer.componentsTitlesState
-  );
-  const theme = useTheme();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    const textVisibleTimeout = setTimeout(() => {
       dispatch(setIsTextVisible(true));
     }, 50);
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(textVisibleTimeout);
   }, [dispatch]);
 
   return (
@@ -40,43 +36,14 @@ const HomePage: React.FC = () => {
           overflow: "hidden",
         }}
       >
-        <ParallaxLogo />
-        <Button
-          variant="outlined"
-          size="large"
-          href="news-page"
-          sx={{
-            position: "absolute",
-            top: "60%",
-            color: "primary.contrastText",
-            fontSize: "28px",
-            height: "80px",
-            width: "440px",
-            fontWeight: "600",
-            borderWidth: "1px",
-            borderColor: "primary.contrastText",
-            borderRadius: "100px",
-            textTransform: "none",
-            "&:hover": {
-              border: 0,
-              background: "linear-gradient(90deg, #ff8177, #8437fd)",
-              color: "primary.contrastText",
-            },
-            [theme.breakpoints.down("md")]: {
-              width: "380px",
-            },
-            [theme.breakpoints.down("xmd")]: {
-              width: "340px",
-            },
-          }}
-        >
-          {componentsTitlesState.homePageTitles.buttonTitle}
-        </Button>
+        <ParallaxLogoComponent />
+        <ContactUsButton />
       </Box>
       <OrganizationInfoBlock />
       <TeamCarousel />
       <AchievementBlock />
       <NewsCarouselBlock />
+      <AvailableLanguagesBlock />
     </Box>
   );
 };

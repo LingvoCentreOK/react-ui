@@ -14,7 +14,7 @@ import germanyFlag from "../../assets/icons/parallax_logo_icons/germany.png";
 import italyFlag from "../../assets/icons/parallax_logo_icons/italy.png";
 import polandFlag from "../../assets/icons/parallax_logo_icons/poland.png";
 
-const ParallaxLogo: React.FC = () => {
+const ParallaxLogoComponent: React.FC = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const { componentsTitlesState, isParallaxEnabled } = useAppSelector(
@@ -50,35 +50,35 @@ const ParallaxLogo: React.FC = () => {
     color: "primary.contrastText",
     cursor: "default",
     fontSize: `${fontSizesArray[0]}px`,
-    marginTop: `${marginTopsArray[0]}%`,
+    marginTop: `${marginTopsArray[0]}vh`,
     background: `-webkit-linear-gradient(0deg, #ff8177, #8437fd)`,
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     [theme.breakpoints.down("lg")]: {
       fontSize: `${fontSizesArray[1]}px`,
-      marginTop: `${marginTopsArray[1]}%`,
+      marginTop: `${marginTopsArray[1]}vh`,
       lineHeight: `${lineHeightsArray[0]}px`,
     },
     [theme.breakpoints.down("md")]: {
       fontSize: `${fontSizesArray[2]}px`,
-      marginTop: `${marginTopsArray[2]}%`,
+      marginTop: `${marginTopsArray[2]}vh`,
     },
     [theme.breakpoints.down("xmd")]: {
       fontSize: `${fontSizesArray[3]}px`,
-      marginTop: `${marginTopsArray[3]}%`,
+      marginTop: `${marginTopsArray[3]}vh`,
       lineHeight: `${lineHeightsArray[1]}px`,
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: `${fontSizesArray[4]}px`,
-      marginTop: `${marginTopsArray[4]}%`,
+      marginTop: `${marginTopsArray[4]}vh`,
     },
   });
   const titleStyles = (theme: Theme): object => ({
-    ...textStyles(theme, [64, 50, 40, 32, 30], [28, 40, 50, 72, 80], [48, 30]),
+    ...textStyles(theme, [64, 50, 40, 32, 30], [26, 29, 28, 30, 30], [48, 30]),
   });
 
   const subtitleStyles = (theme: Theme): object => ({
-    ...textStyles(theme, [48, 38, 30, 22, 20]),
+    ...textStyles(theme, [48, 38, 30, 22, 20], [26, -2, -1, 0, 0]),
     lineHeight: "76px",
   });
 
@@ -106,6 +106,10 @@ const ParallaxLogo: React.FC = () => {
         <Typography
           sx={{
             ...titleStyles(theme),
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "7vw",
+              mt: "30vh",
+            },
           }}
         >
           {componentsTitlesState.homePageTitles.title}
@@ -114,6 +118,9 @@ const ParallaxLogo: React.FC = () => {
           sx={{
             ...subtitleStyles(theme),
             margin: "0 auto",
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "5vw",
+            },
           }}
         >
           {componentsTitlesState.homePageTitles.subtitle}
@@ -202,4 +209,4 @@ const ParallaxLogo: React.FC = () => {
   );
 };
 
-export default ParallaxLogo;
+export default ParallaxLogoComponent;

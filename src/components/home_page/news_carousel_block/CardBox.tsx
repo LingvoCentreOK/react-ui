@@ -8,16 +8,29 @@ const CardBox: React.FC<{
   oneNews: OneNewsProps;
   styles: SeparateNewsStylesProps;
   setTreeDotsStyle: boolean;
-  useDoubleClick: boolean;
   showPointer: boolean;
-}> = ({ oneNews, styles, setTreeDotsStyle, useDoubleClick, showPointer }) => {
+  treeDotsStyle: object;
+  isCardDesign?: boolean;
+  onCardClickReaction?: boolean;
+}> = ({
+  oneNews,
+  styles,
+  setTreeDotsStyle,
+  showPointer,
+  treeDotsStyle,
+  isCardDesign,
+  onCardClickReaction,
+}) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [counter, setCounter] = useState<number>(0);
-  const handleCardClick = (): void => {
-    setCounter(counter + 1);
-    navigate(`/news-page/${oneNews.id}`);
+  const handleCardClick = (onCardClickReaction: boolean | undefined): void => {
+    if (counter < 1 && showPointer && onCardClickReaction) {
+      setCounter(counter + 1);
+      navigate(`/news-page/${oneNews.id}`);
+    }
   };
+
   useEffect(() => {
     if (window.location.pathname !== "/news-page") {
       setCounter(0);
@@ -25,19 +38,13 @@ const CardBox: React.FC<{
   }, []);
 
   const timeInformation = "Дата публікації новини: ";
-  const treeDotsStyle = {
-    display: "inline-block",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  };
 
   return (
     <Box
       sx={{
         mb: "2px",
         [theme.breakpoints.down("xlg")]: {
-          lineHeight: "22px",
+          lineHeight: "16px",
         },
         [theme.breakpoints.down("sm")]: {
           lineHeight: "10px",
@@ -45,19 +52,20 @@ const CardBox: React.FC<{
       }}
     >
       <Card
-        variant="outlined"
+        variant={isCardDesign ? "elevation" : "outlined"}
+        elevation={isCardDesign ? 2 : 0}
+        onClick={() => {
+          handleCardClick(onCardClickReaction);
+        }}
         sx={{
           backgroundColor: "#00000000",
           border: "none",
+          cursor: showPointer && onCardClickReaction ? "pointer" : "default",
         }}
       >
         <CardContent
-          onDoubleClick={() => {
-            if (useDoubleClick && counter < 1 && showPointer) handleCardClick();
-          }}
           onClick={() => {
-            if (!useDoubleClick && counter < 1 && showPointer)
-              handleCardClick();
+            handleCardClick(!onCardClickReaction);
           }}
           sx={{
             padding: "0px",

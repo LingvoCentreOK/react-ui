@@ -125,6 +125,13 @@ export type BreakpointStyles = {
   letterSpacing: string;
 };
 
+export type TreeDotsStyleProps = {
+  display: string;
+  whiteSpace: string;
+  overflow: string;
+  textOverflow: string;
+};
+
 ///// Types for other files /////
 
 export type TeamCarouselProps = {
@@ -134,6 +141,7 @@ export type TeamCarouselProps = {
 export type CarouselProps = {
   deviceType?: string | undefined;
   responsiveItems: Array<number>;
+  isDraggable: boolean;
   children: React.ReactNode;
 };
 
@@ -160,4 +168,27 @@ export type OneNewsProps = {
   title: string;
   type?: string;
   url?: string;
+};
+
+export type languagesAndColors = string[];
+
+export type AvailableLanguagesBlockTitlesProps = {
+  title: string;
+  languagesAndStylesArray: languagesAndColors[];
+};
+
+export type servicesContentProps = {
+  title: string;
+  priceInfos: string[];
+};
+
+export type ContactInfo = {
+  contactIcon: string;
+  contactContext: React.ReactNode;
+  contactLink: string;
+};
+
+export type ContactInfoProps = {
+  title: string;
+  infos: ContactInfo[];
 };
