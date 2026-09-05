@@ -4,7 +4,7 @@ import {
   CardBoxFontStylesProps,
   ComponentsTitles,
   OneNewsProps,
-  TeamMember,
+  TeamMemberProps,
   TreeDotsStyleProps,
 } from "../types";
 import imgCarousel1 from "../assets/images/carousel_block_images/img_carousel_1.jpg";
@@ -37,42 +37,30 @@ export const componentsTitles: ComponentsTitles = {
   newsBlockTitle: "НОВИНИ",
 };
 
-export const teamMembers: TeamMember[] = [
+export const teamMembers: TeamMemberProps[] = [
   {
     id: "0",
-    name: { name1: "Ольга", name2: "Хельга" },
-    info: {
-      position1: "Викладач англійської мови, магістр",
-      position2: "Викладач дацької мови, бакалавр",
-    },
-    images: { image1: imgCarousel1, image2: img1 },
+    name: "Ольга",
+    info: "Викладач англійської мови, магістр",
+    image: imgCarousel1,
   },
   {
     id: "1",
-    name: { name1: "Хельга", name2: "Ханна" },
-    info: {
-      position1: "Викладач дацької мови, бакалавр",
-      position2: "Викладач німецької мови, магістр",
-    },
-    images: { image1: img1, image2: img2 },
+    name: "Хельга",
+    info: "Викладач дацької мови, бакалавр",
+    image: img1,
   },
   {
     id: "2",
-    name: { name1: "Ханна", name2: "Агнешка" },
-    info: {
-      position1: "Викладач німецької мови, магістр",
-      position2: "Викладач польської мови, бакалавр",
-    },
-    images: { image1: img2, image2: img3 },
+    name: "Ханна",
+    info: "Викладач німецької мови, магістр",
+    image: img2,
   },
   {
     id: "3",
-    name: { name1: "Агнешка", name2: "Ольга" },
-    info: {
-      position1: "Викладач польської мови, бакалавр",
-      position2: "Викладач англійської мови, магістр",
-    },
-    images: { image1: img3, image2: imgCarousel1 },
+    name: "Божена",
+    info: "Викладач польської мови, бакалавр",
+    image: img3,
   },
 ];
 
@@ -162,7 +150,7 @@ type InitialState = {
   isTextVisible: boolean;
   images: string[];
   isParallaxEnabled: boolean;
-  teamMembersState: TeamMember[];
+  teamMembersState: TeamMemberProps[];
   newsStoriesNumbersArray: Array<object>;
   newsData: object;
   cardBoxFontStylesState: CardBoxFontStylesProps;
@@ -212,7 +200,7 @@ const rootSlice = createSlice({
     setIsParallaxEnabled(state, action: PayloadAction<boolean>) {
       state.isParallaxEnabled = action.payload;
     },
-    setTeamMembersState(state, action: PayloadAction<TeamMember[]>) {
+    setTeamMembersState(state, action: PayloadAction<TeamMemberProps[]>) {
       state.teamMembersState = action.payload;
     },
     setNewsStoriesNumbersArray(state, action) {

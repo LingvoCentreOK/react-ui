@@ -18,16 +18,6 @@ export type ComponentsTitles = {
   newsBlockTitle: string;
 };
 
-export type TeamMember = {
-  id: string;
-  name: { name1: string; name2?: string | undefined };
-  info: {
-    position1: string;
-    position2?: string | undefined;
-  };
-  images: { image1: string; image2?: string | undefined };
-};
-
 export type CardBoxFontStylesProps = {
   newsBlockStyles: {
     dateStyles: {

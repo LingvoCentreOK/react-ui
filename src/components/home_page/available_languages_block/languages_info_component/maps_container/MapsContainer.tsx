@@ -14,7 +14,7 @@ const MapsComponent: React.FC = () => {
   };
 
   return (
-    <APIProvider apiKey={"AIzaSyAg6QWcm1iCT58f7CzSOYMw8zc-BQbzRCQ"}>
+    <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY ?? ""}>
       <div style={{ height: "100%", width: "100%" }}>
         <Map
           zoom={16}

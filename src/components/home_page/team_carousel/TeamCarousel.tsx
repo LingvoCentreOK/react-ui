@@ -2,12 +2,8 @@ import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useAppSelector } from "../../../hooks";
 import "react-multi-carousel/lib/styles.css";
-import imgCarousel1 from "../../../assets/images/carousel_block_images/img_carousel_1.jpg";
-import img1 from "../../../assets/images/organization_info_block_images/img_1.jpg";
-import img2 from "../../../assets/images/organization_info_block_images/img_2.jpg";
-import img3 from "../../../assets/images/organization_info_block_images/img_3.jpg";
-import TeamMemberItem from "./TeamMemberItem";
 import { TeamMemberProps } from "../../../types";
+import TeamMemberItem from "./TeamMemberItem";
 import CarouselBlock from "../../../shared/CarouselBlock";
 
 const TeamCarousel: React.FC = () => {
@@ -15,33 +11,9 @@ const TeamCarousel: React.FC = () => {
   const componentsTitlesState = useAppSelector(
     (state) => state.reducer.componentsTitlesState
   );
-
-  const teamMembersData: TeamMemberProps[] = [
-    {
-      id: "0",
-      name: "Ольга",
-      info: "Викладач англійської мови, магістр",
-      image: imgCarousel1,
-    },
-    {
-      id: "1",
-      name: "Хельга",
-      info: "Викладач дацької мови, бакалавр",
-      image: img1,
-    },
-    {
-      id: "2",
-      name: "Ханна",
-      info: "Викладач німецької мови, магістр",
-      image: img2,
-    },
-    {
-      id: "3",
-      name: "Божена",
-      info: "Викладач польської мови, бакалавр",
-      image: img3,
-    },
-  ];
+  const teamMembersData = useAppSelector(
+    (state) => state.reducer.teamMembersState
+  );
 
   return (
     <Box
