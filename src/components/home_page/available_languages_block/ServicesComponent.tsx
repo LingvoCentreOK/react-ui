@@ -68,34 +68,69 @@ const ServicesComponent: React.FC = () => {
             container
             direction="column"
             justifyContent="space-evenly"
-            alignItems="center"
             sx={{
               overflow: "hidden",
+              width: "72%",
             }}
           >
             {servicesContent.priceInfos.map(
-              (priceServicesInfo: string, index: number): React.JSX.Element => (
-                <Grid key={index} item xs={12} sm={6}>
-                  <Typography
-                    gutterBottom
-                    variant="h4"
-                    color="primary.contrastText"
-                    sx={{
-                      mb: "62px",
-                      fontFamily: "Maven Pro, sans-serif",
-                      letterSpacing: "2px",
-                      cursor: "default",
-                      [theme.breakpoints.down("xl")]: {
-                        fontSize: "2vw",
-                        letterSpacing: "0.1vw",
-                        mb: "3vw",
-                      },
-                    }}
-                  >
-                    {priceServicesInfo}
-                  </Typography>
-                </Grid>
-              )
+              (priceServicesInfo: string, index: number): React.JSX.Element => {
+                const [label, price] = priceServicesInfo.split(" - ");
+                return (
+                  <Grid key={index} item xs={12}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "baseline",
+                        gap: "16px",
+                        py: "18px",
+                        borderBottom:
+                          index < servicesContent.priceInfos.length - 1
+                            ? "1px solid rgba(255, 255, 255, 0.25)"
+                            : "none",
+                        [theme.breakpoints.down("xl")]: {
+                          py: "1.4vw",
+                        },
+                      }}
+                    >
+                      <Typography
+                        color="primary.contrastText"
+                        sx={{
+                          fontFamily: "Maven Pro, sans-serif",
+                          fontWeight: "400",
+                          letterSpacing: "1px",
+                          cursor: "default",
+                          fontSize: "22px",
+                          [theme.breakpoints.down("xl")]: {
+                            fontSize: "1.7vw",
+                            letterSpacing: "0.1vw",
+                          },
+                        }}
+                      >
+                        {label}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontFamily: "Maven Pro, sans-serif",
+                          fontWeight: "700",
+                          letterSpacing: "1px",
+                          cursor: "default",
+                          color: "#FFD166",
+                          whiteSpace: "nowrap",
+                          fontSize: "24px",
+                          [theme.breakpoints.down("xl")]: {
+                            fontSize: "1.9vw",
+                            letterSpacing: "0.1vw",
+                          },
+                        }}
+                      >
+                        {price}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                );
+              }
             )}
           </Grid>
         </Box>

@@ -31,7 +31,6 @@ const HomePage: React.FC = () => {
           justifyContent: "center",
           alignItems: "center",
           background: "linear-gradient(160deg, #CDA5F3, #A6B8F3)",
-          opacity: "0.6",
           boxSizing: "border-box",
           overflow: "hidden",
         }}
